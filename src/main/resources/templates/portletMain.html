@@ -1,10 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>포틀릿메인임</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+    <title>Bold BS4 Cards with Hover Effect 50</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #efefef;
+            display: flex;
+        }
+
+        .portlet-main{
+            padding: 100px 0;
+            margin: 0 auto;
+        }
+
+        .portlet-border{
+
+        }
+
+        button {
+            width: 70px;
+            height: 70px;
+            border: none;
+            border-radius: 8px;
+            margin: 12px;
+            cursor: move;
+            font-size: 30px;
+            background: #ffffff;
+        }
+
+        .container {
+            margin: 10px;
+            padding: 10px;
+            background-color: #b5c1dc57;
+            border-radius: 8px;
+        }
+
+        .draggable.dragging {
+            opacity: 0.5;
+        }
+    </style>
+
 </head>
 <body>
-아니어도 메인임.
+    <main class="portlet-main">
+        <div class="container">
+            <div class="portlet-border">
+                <button class="draggable" draggable="true">🦊</button>
+            </div>
+            <button class="draggable" draggable="true">🐸</button>
+            <button class="draggable" draggable="true">🐶</button>
+            <button class="draggable" draggable="true">🐱</button>
+            <button class="draggable" draggable="true">🦁‍</button>
+            <button class="draggable" draggable="true">🐯‍</button>
+            <button class="draggable" draggable="true">🐷‍</button>
+            <button class="draggable" draggable="true">🙈</button>
+            <button class="draggable" draggable="true">🙉</button>
+            <button class="draggable" draggable="true">🙊</button>
+            <button class="draggable" draggable="true">🐵</button>
+            <button class="draggable" draggable="true">🦝</button>
+            <button class="draggable" draggable="true">🐴</button>
+            <button class="draggable" draggable="true">🦄</button>
+            <button class="draggable" draggable="true">🦬</button>
+            <button class="draggable" draggable="true">🐚</button>
+            <button class="draggable" draggable="true">🪰</button>
+            <button class="draggable" draggable="true">🏵️</button>
+            <button class="draggable" draggable="true">🌵</button>
+            <button class="draggable" draggable="true">🌰</button>
+        </div>
+    </main>
+
+
+    <script>
+        const draggables = document.querySelectorAll(".draggable");
+        const containers = document.querySelectorAll(".container");
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener("dragstart", () => {
+                draggable.classList.add("dragging");
+            });
+
+            draggable.addEventListener("dragend", () => {
+                draggable.classList.remove("dragging");
+            });
+        });
+
+        containers.forEach(container => {
+            container.addEventListener("dragover", e => {
+                e.preventDefault();
+                const afterElement = getDragAfterElement(container, e.clientX);
+                const draggable = document.querySelector(".dragging");
+                if (afterElement === undefined) {
+                    container.appendChild(draggable);
+                } else {
+                    container.insertBefore(draggable, afterElement);
+                }
+            });
+        });
+
+        function getDragAfterElement(container, x) {
+            const elements = [
+                ...container.querySelectorAll(".draggable:not(.dragging)"),
+            ];
+
+            return elements.reduce(
+                (closest, child) => {
+                    const potlet = child.getBoundingClientRect();
+                    const offset = x - potlet.left - potlet.width / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                },
+                { offset: Number.NEGATIVE_INFINITY },
+            ).element;
+        }
+
+    </script>
 </body>
 </html>
