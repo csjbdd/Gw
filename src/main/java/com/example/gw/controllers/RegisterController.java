@@ -1,15 +1,29 @@
 package com.example.gw.controllers;
 
+import com.example.gw.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @Controller
 public class RegisterController {
 
-    @GetMapping("/register")
+
+
+
+
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage() {
 
+        return "register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String regis00ter(@RequestParam Map<String,Object> list) {
+        list.get("id");
         return "register";
     }
 }
