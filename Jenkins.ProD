@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    stages {
+        stage('remove'){
+            steps{
+                echo 'remove past build..'
+                sh 'rm -rf build'
+            }
+        }
+        stage('build'){
+            steps{
+                echo 'building..'
+                sh 'chmod +x gradlew'
+                sh './gradlew bootwar'
+                echo 'build success!'
+            }
+        }
+        stage('kill port'){
+        			steps{
+        				echo 'need to kill past port...'
+        				sh 'sh /home/egline/stop.sh'
+        			}
+        		}
+        stage('deploy'){
+            steps{
+                echo 'deploying...'
+                sh 'rm -rf /home/egline/egline.war'
+                sh 'mv build/libs/* /home/egline/'
+            }
+        }
+        stage('execute'){
+            steps{
+                echo 'starting...'
+                //nohup 젠킨스에서 안먹음
+                //sh 'sh /home/travel-restapi/start.sh'
+                //JENKINS_NODE_COOKIE=dontKillMe 혹은 BUILD_ID=dontkillME 를 할당하여 Process 를 실행하면 된다.
+                sh('JENKINS_NODE_COOKIE=dontKillMe && nohup /home/egline/start.sh > /home/egline/log/nohup.log 2>&1 &')
+            }
+        }
+
+
+    }
+
+}
