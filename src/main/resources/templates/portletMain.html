@@ -17,10 +17,6 @@
             margin: 0 auto;
         }
 
-        .portlet-border{
-
-        }
-
         button {
             width: 70px;
             height: 70px;
@@ -48,9 +44,7 @@
 <body>
     <main class="portlet-main">
         <div class="container">
-            <div class="portlet-border">
-                <button class="draggable" draggable="true">🦊</button>
-            </div>
+            <button class="draggable" draggable="true">🦊</button>
             <button class="draggable" draggable="true">🐸</button>
             <button class="draggable" draggable="true">🐶</button>
             <button class="draggable" draggable="true">🐱</button>
@@ -86,6 +80,22 @@
             draggable.addEventListener("dragend", () => {
                 draggable.classList.remove("dragging");
             });
+
+            draggable.addEventListener("dragenter", e => {
+                let container = containers[0]
+                if (e.target.className == "draggable") {
+                    container.insertBefore(draggable, afterElement);
+                    e.target.style.background = "purple";
+                }
+            });
+
+            draggable.addEventListener("dragleave", e => {
+                let container = containers[0]
+                if (e.target.className == "draggable") {
+                    container.insertBefore(draggable, afterElement);
+                    e.target.style.background = "purple";
+                }
+            });
         });
 
         containers.forEach(container => {
@@ -109,9 +119,9 @@
             return elements.reduce(
                 (closest, child) => {
                     const potlet = child.getBoundingClientRect();
-                    const offset = x - potlet.left - potlet.width / 2;
-                    if (offset < 0 && offset > closest.offset) {
-                        return { offset: offset, element: child };
+                    const offsetX = x - potlet.left - potlet.width / 2;
+                    if (offsetX < 0 && offsetX > closest.offset) {
+                        return { offset: offsetX, element: child };
                     } else {
                         return closest;
                     }
