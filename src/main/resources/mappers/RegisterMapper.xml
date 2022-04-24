@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.gw.mappers.UserMapper">
-    <insert id="registerUser" parameterType="com.example.gw.vos.UserVo">
+    <!--<insert id="registerUser" parameterType="com.example.gw.vos.UserVo">
         INSERT INTO usercheck (
         `id`,
         `password`,
@@ -12,6 +12,10 @@
         #{password},
         SYSDATE()
         )
-    </insert>
+    </insert>-->
+
+    <select id="test" parameterType="map" resultType="String">
+        SELECT #{a} FROM DUAL
+    </select>
 
 </mapper>
