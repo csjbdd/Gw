@@ -1,5 +1,5 @@
 
-package com.example.gw.services;
+package com.example.gw.common.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public interface ICommonService {
      * @Create : 2022년 04월 23일
      * @version 1.0
      */
-    public String test(Map<String, Object> map);
+    public String test(Map<String, Object> map) throws Exception;
 
     /**
      * selectOne 메서드
@@ -30,7 +30,7 @@ public interface ICommonService {
      * @Create : 2022년 04월 23일
      * @version 1.0
      */
-    public Map<String, Object> selectOne(String statement, Map<String, Object> map);
+    public Map<String, Object> selectOne(String statement, Map<String, Object> map) throws Exception;
 
     /**
      * selectList 메서드
@@ -39,7 +39,7 @@ public interface ICommonService {
      * @Create : 2022년 04월 23일
      * @version 1.0
      */
-    public List<Object> selectList(String statement, Map<String, Object> map);
+    public List<Object> selectList(String statement, Map<String, Object> map) throws Exception;
 
     /**
      * insert 메서드
@@ -48,7 +48,7 @@ public interface ICommonService {
      * @Create : 2022년 04월 23일
      * @version 1.0
      */
-    public int insert(String statement, Map<String, Object> map);
+    public int insert(String statement, Map<String, Object> map) throws Exception;
 
     /**
      * update 메서드
@@ -57,7 +57,7 @@ public interface ICommonService {
      * @Create : 2022년 04월 23일
      * @version 1.0
      */
-    public int update(String statement, Map<String, Object> map);
+    public int update(String statement, Map<String, Object> map) throws Exception;
 
     /**
      * delete 메서드
@@ -66,5 +66,5 @@ public interface ICommonService {
      * @Create : 2022년 04월 23일
      * @version 1.0
      */
-    public int delete(String statement, Map<String, Object> map);
+    public int delete(String statement, Map<String, Object> map) throws Exception;
 }
