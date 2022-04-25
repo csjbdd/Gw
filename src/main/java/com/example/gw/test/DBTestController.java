@@ -1,9 +1,9 @@
-package com.example.gw.controllers;
+package com.example.gw.test;
 
-import com.example.gw.services.ICommonService;
+import com.example.gw.common.service.ICommonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @Create : 2022년 04월 23일
  * @version 1.0
  */
-@RestController
+@Controller
 public class DBTestController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class DBTestController {
      * @version 1.0
      */
     @GetMapping("/DBTest1")
-    public String DBTest() {
+    public String DBTest() throws Exception {
         Map<String, Object> map = new HashMap<>();
 
         // db 테스트할 문자열을 입력
@@ -39,6 +39,6 @@ public class DBTestController {
         // commonService 테스트 시작
         // commonService에서 sqlsession 실행후 파라미터값을 출력해준다.
         commonService.test(map);
-        return "portletMain";
+        return "login";
     }
 }

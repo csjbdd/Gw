@@ -1,4 +1,4 @@
-package com.example.gw.config;
+package com.example.gw.common.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
