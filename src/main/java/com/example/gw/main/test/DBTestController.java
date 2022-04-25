@@ -1,4 +1,4 @@
-package com.example.gw.test;
+package com.example.gw.main.test;
 
 import com.example.gw.common.service.ICommonService;
 import org.springframework.beans.factory.annotation.Autowired;
