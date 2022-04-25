@@ -21,7 +21,7 @@ public class CommonServiceImpl implements ICommonService {
     private ICommonDAO CommonDAO;
 
     @Autowired
-    private CommonServiceImpl(ICommonDAO commonDAO){
+    public CommonServiceImpl(ICommonDAO commonDAO){
         this.CommonDAO = commonDAO;
     }
 

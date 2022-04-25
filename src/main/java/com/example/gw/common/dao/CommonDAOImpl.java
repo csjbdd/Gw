@@ -20,7 +20,7 @@ public class CommonDAOImpl implements ICommonDAO{
     private final SqlSession sqlsession;
 
     @Autowired
-    private CommonDAOImpl(SqlSession sqlsession) {
+    public CommonDAOImpl(SqlSession sqlsession) {
         this.sqlsession = sqlsession;
     }
 
