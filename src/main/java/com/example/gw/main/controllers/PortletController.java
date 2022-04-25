@@ -1,4 +1,4 @@
-package com.example.gw.controllers;
+package com.example.gw.main.controllers;
 
 import com.example.gw.common.service.ICommonService;
 import org.springframework.beans.factory.annotation.Autowired;
