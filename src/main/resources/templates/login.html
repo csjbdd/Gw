@@ -45,7 +45,7 @@
         <form method="post">
             <h2 class="visually-hidden">Login Form</h2>
             <div class="illustration"><img style="width: 100%" src="/images/logo.svg"></div>
-            <div class="mb-3"><input class="form-control" type="text" name="id" placeholder="아이디"></div>
+            <div class="mb-3"><input id="loginid" class="form-control" type="text" name="id" placeholder="아이디"></div>
             <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="패스워드"></div>
             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">로그인</button>
             </div>
@@ -74,7 +74,11 @@
     <script>
         window.onload = function () {
             var container = document.getElementById('map');
+            var loginId = document.getElementById('loginid');
             var loginClean = document.getElementById('loginclean');
+
+            loginId.focus();
+
             var backgroundColors = ['#FAF0E6','#FFC0CB','#D8BFD8','#008080','#B0E0E6','#87CEFA','#20B2AA','#FFFFE0','#EEE8AA','#00FF7F','#FFF0F5'];
             var options = {
                 center: new kakao.maps.LatLng(37.48326135313084, 126.89789439231977),
