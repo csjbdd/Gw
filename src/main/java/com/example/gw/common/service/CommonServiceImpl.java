@@ -36,7 +36,7 @@ public class CommonServiceImpl implements ICommonService {
         String str;
         try{
             Map<String, Object> map = new HashMap<>();
-            map = CommonDAO.selectOne("com.example.gw.mappers.testMapper.test", parameter);
+            map = CommonDAO.selectOne("testMapper.test", parameter);
             str = map.get("a").toString();
             System.out.println(str);
         }catch (Exception e){
