@@ -41,11 +41,14 @@
     <section class="register-photo">
         <div class="form-container">
             <div class="image-holder"></div>
-            <form method="post">
+            <form method="post" onsubmit="return checkAll()">
                 <h2 class="text-center"><strong>회원가입</strong></h2>
-                <div class="mb-3"><input class="form-control" type="text" name="id" placeholder="아이디"></div>
-                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="패스워드"></div>
-                <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="패스워드 확인"></div>
+                <div class="mb-3"><input id="registerid" class="form-control" type="text" name="id" placeholder="아이디" maxlength="12"></div>
+                <div class="mb-3"><label></label></div>
+                <div class="mb-3"><input id="registerpw" class="form-control" type="password" name="password" placeholder="패스워드" maxlength="12"></div>
+                <div class="mb-3"><label></label></div>
+                <div class="mb-3"><input id="registerpw2" class="form-control" type="password" name="password" placeholder="패스워드 확인" maxlength="12"></div>
+                <div class="mb-3"><label></label></div>
                 <div class="mb-3">
                 </div>
                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">회원가입</button></div>
@@ -54,6 +57,83 @@
     </section>
     <script src="../../../../assets/bootstrap/js/bootstrap.min.js"></script>
     <script>
+        var registerId = document.getElementById('registerid');
+        var registerPw = document.getElementById('registerpw');
+        var registerPw2 = document.getElementById('registerpw2');
+        registerId.focus();
+
+
+        const checkAll = () => {
+            if (!checkUserId(registerId.value)) {
+                return false;
+            } else if (!checkPassword(registerId.value, registerPw.value,registerPw2.value)) {
+                return false;
+            }
+            return false;
+        }
+
+        // 공백확인 함수
+        const checkExistData = (value, dataName) => {
+            if (value == "") {
+                alert(dataName + " 입력해주세요!");
+                return false;
+            }
+            return true;
+        }
+
+
+        const checkUserId = (id) => {
+            //Id가 입력되었는지 확인하기
+          if (!checkExistData(id, "아이디를")) {
+              return false;
+          }
+            let idRegExp = /^[a-zA-z0-9]{4,12}$/; //아이디 유효성 검사
+            if (!idRegExp.test(id)) {
+                alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+                registerId.value = "";
+                registerId.focus();
+                return false;
+            }
+            return true; //확인이 완료되었을 때
+        }
+
+        function checkPassword(id, password1, password2) {
+            //비밀번호가 입력되었는지 확인하기
+            if (!checkExistData(password1, "비밀번호를"))
+                return false;
+            //비밀번호 확인이 입력되었는지 확인하기
+            if (!checkExistData(password2, "비밀번호 확인을"))
+                return false;
+
+            var password1RegExp = /^[a-zA-z0-9]{4,12}$/; //비밀번호 유효성 검사
+            if (!password1RegExp.test(password1)) {
+                alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+                registerPw.value = "";
+                registerPw.focus();
+                return false;
+            }
+            //비밀번호와 비밀번호 확인이 맞지 않다면..
+            if (password1 != password2) {
+                alert("두 비밀번호가 맞지 않습니다.");
+                registerPw.value = "";
+                registerPw2.value = "";
+                registerPw2.focus();
+                return false;
+            }
+
+            //아이디와 비밀번호가 같을 때..
+            if (id == password1) {
+                alert("아이디와 비밀번호는 같을 수 없습니다!");
+                registerPw.value = "";
+                registerPw2.value = "";
+                registerPw2.focus();
+                return false;
+            }
+            return true; //확인이 완료되었을 때
+        }
+
+
+
 
     </script>
 </body>
