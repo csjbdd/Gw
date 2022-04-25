@@ -18,8 +18,12 @@ import java.util.Map;
 @Service
 public class CommonServiceImpl implements ICommonService {
 
-    @Autowired
     private ICommonDAO CommonDAO;
+
+    @Autowired
+    public CommonServiceImpl(ICommonDAO commonDAO){
+        this.CommonDAO = commonDAO;
+    }
 
     /**
      * DB 테스트
@@ -27,10 +31,9 @@ public class CommonServiceImpl implements ICommonService {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 23일
-     * @version 1.0
      */
     public String test(Map<String, Object> parameter) throws Exception {
-        String str = "";
+        String str;
         try{
             Map<String, Object> map = new HashMap<>();
             map = CommonDAO.selectOne("com.example.gw.mappers.testMapper.test", parameter);
@@ -47,7 +50,6 @@ public class CommonServiceImpl implements ICommonService {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 23일
-     * @version 1.0
      */
     public Map<String, Object> selectOne(String statement, Map<String, Object> parameter) throws Exception {
         Map<String, Object> result = new HashMap<>();
@@ -64,7 +66,6 @@ public class CommonServiceImpl implements ICommonService {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 23일
-     * @version 1.0
      */
     public List<Object> selectList(String statement, Map<String, Object> parameter) throws Exception {
         List<Object> result = null;
@@ -81,10 +82,9 @@ public class CommonServiceImpl implements ICommonService {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 23일
-     * @version 1.0
      */
     public int insert(String statement, Map<String, Object> parameter) throws Exception {
-        int result = 0;
+        int result;
         try{
             result = CommonDAO.insert(statement, parameter);
         }catch (Exception e){
@@ -98,10 +98,9 @@ public class CommonServiceImpl implements ICommonService {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 23일
-     * @version 1.0
      */
     public int update(String statement, Map<String, Object> parameter) throws Exception {
-        int result = 0;
+        int result;
         try{
             result = CommonDAO.update(statement, parameter);
         }catch (Exception e){
@@ -115,10 +114,9 @@ public class CommonServiceImpl implements ICommonService {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 23일
-     * @version 1.0
      */
     public int delete(String statement, Map<String, Object> parameter) throws Exception {
-        int result = 0;
+        int result;
         try{
             result = CommonDAO.delete(statement, parameter);
         }catch (Exception e){

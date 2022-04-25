@@ -11,7 +11,6 @@ public interface ICommonDAO {
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public Map<String, Object> selectOne(String statement, Map<String, Object> parameter) throws Exception;
     public Map<String, Object> selectOne(Map<String, Object> parameter, String statement) throws Exception;
@@ -23,7 +22,6 @@ public interface ICommonDAO {
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public String selectString(String statement, Map<String, Object> parameter) throws Exception;
 
@@ -33,7 +31,6 @@ public interface ICommonDAO {
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public List<Object> selectList(String statement, Map<String, Object> parameter) throws Exception;
     public List<Object> selectList(Map<String, Object> parameter, String statement) throws Exception;
@@ -44,7 +41,6 @@ public interface ICommonDAO {
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public int insert(String statement, Map<String, Object> parameter) throws Exception;
     public int insert(Map<String, Object> parameter, String statement) throws Exception;
@@ -55,7 +51,6 @@ public interface ICommonDAO {
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public int update(String statement, Map<String, Object> parameter) throws Exception;
     public int update(Map<String, Object> parameter, String statement) throws Exception;
@@ -66,7 +61,6 @@ public interface ICommonDAO {
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public int delete(String statement, Map<String, Object> parameter) throws Exception;
     public int delete(Map<String, Object> parameter, String statement) throws Exception;

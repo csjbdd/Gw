@@ -27,7 +27,6 @@ public class DBTestController {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 23일
-     * @version 1.0
      */
     @GetMapping("/DBTest1")
     public String DBTest() throws Exception {

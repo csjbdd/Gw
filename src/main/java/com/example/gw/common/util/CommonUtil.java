@@ -18,13 +18,13 @@ public class CommonUtil {
      *
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public static String null2Str(Object obj, String str){
-        if(str == null || str.toString().trim().length() == 0){
+        String str2String = obj.toString();
+        if(obj == null || str2String.trim().length() == 0){
             return str;
         }else{
-            return obj.toString();
+            return str2String;
         }
     }
 
@@ -34,12 +34,10 @@ public class CommonUtil {
      * @param : "yyyy-MM-dd", "yyyy/MM/dd" 등 포맷형식
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     public static String getToday(String format){
         LocalDate now = LocalDate.now(ZoneId.of("Asia/Seoul"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-        String formatDate = now.format(formatter);
-        return formatDate;
+        return now.format(formatter);
     }
 }
