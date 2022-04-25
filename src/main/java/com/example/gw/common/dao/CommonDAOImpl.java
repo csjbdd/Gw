@@ -17,8 +17,12 @@ import java.util.Map;
 @Repository
 public class CommonDAOImpl implements ICommonDAO{
 
+    private final SqlSession sqlsession;
+
     @Autowired
-    private SqlSession sqlsession;
+    private CommonDAOImpl(SqlSession sqlsession) {
+        this.sqlsession = sqlsession;
+    }
 
     /**
      * selectOne 메서드
@@ -26,7 +30,6 @@ public class CommonDAOImpl implements ICommonDAO{
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     @Override
     public Map<String, Object> selectOne(String statement, Map<String, Object> parameter) throws Exception {
@@ -48,7 +51,6 @@ public class CommonDAOImpl implements ICommonDAO{
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     @Override
     public String selectString(String statement, Map<String, Object> parameter) throws Exception {
@@ -61,7 +63,6 @@ public class CommonDAOImpl implements ICommonDAO{
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     @Override
     public List<Object> selectList(String statement, Map<String, Object> parameter) throws Exception {
@@ -78,7 +79,6 @@ public class CommonDAOImpl implements ICommonDAO{
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     @Override
     public int insert(String statement, Map<String, Object> parameter) throws Exception {
@@ -95,7 +95,6 @@ public class CommonDAOImpl implements ICommonDAO{
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     @Override
     public int update(String statement, Map<String, Object> parameter) throws Exception {
@@ -112,7 +111,6 @@ public class CommonDAOImpl implements ICommonDAO{
      * @param parameter - sql binding 객체
      * @Author : 송기환
      * @Create : 2022년 04월 24일
-     * @version 1.0
      */
     @Override
     public int delete(String statement, Map<String, Object> parameter) throws Exception {
