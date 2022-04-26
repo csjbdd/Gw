@@ -18,6 +18,6 @@ public class SampleController {
         model.addAttribute("mainPath", "sample/sample"); // 샘플 main의 경로
         model.addAttribute("mainId", "sample");          // 샘플 mainId
 
-        return "CommonTemplate";
+        return "CommonTemplate"; // 무조건 CommonTemplate 로 경로지정(공통템플릿임)
     }
 }
