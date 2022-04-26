@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="no-js chrome no-touch" l lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout/header :: header">
+</head>
+<body class="theme-blush" _c_t_common="1">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper" style="display: none;">
+        <div class="loader">
+            <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/loader.svg" width="48" height="48" alt="Aero"></div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- Page Loader -->
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- Overlay For Sidebars -->
+
+    <!-- Main Search -->
+    <div id="search">
+        <button id="close" type="button" class="close btn btn-primary btn-icon btn-icon-mini btn-round">x</button>
+        <form>
+            <input type="search" value="" placeholder="Search...">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <!-- Main Search -->
+
+    <!-- Right Icon menu Sidebar -->
+    <div class="navbar-right" th:replace="layout/navbar-right :: navbar-right"></div>
+    <!-- Right Icon menu Sidebar -->
+
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar" th:replace="layout/aside-left :: aside-left"></aside>
+    <!-- Left Sidebar -->
+
+    <!-- Right Sidebar -->
+    <aside id="rightsidebar" class="right-sidebar" th:replace="layout/aside-right :: aside-right"></aside>
+    <!-- Right Sidebar -->
+
+    <!-- Main Content -->
+    <section class="content" th:replace="sample/sample :: sample"></section>
+    <!-- Main Content -->
+
+    <div class="jvectormap-tip"></div>
+
+
+</body>
+</html>
