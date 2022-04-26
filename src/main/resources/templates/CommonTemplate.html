@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html class="no-js chrome no-touch" l lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/header :: header">
+<html class="no-js chrome no-touch" lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- 변수지정 -->
+<th:block th:with="userNm='홍길동'">
+
+<head>
+    <th:block th:replace="layout/meta-data :: meta-data"></th:block>
+    <th:block th:if="${headerYn == 'Y'}">
+        <th:block th:replace="${headerPath} :: ${headerId}"></th:block>
+    </th:block>
 </head>
-<body class="theme-blush" _c_t_common="1">
+<body  class="theme-blush" _c_t_common="1"> <!-- theme-blush 세션값으로 사용자정보에 맞춰 불러와야함 -->
+
     <!-- Page Loader -->
     <div class="page-loader-wrapper" style="display: none;">
         <div class="loader">
@@ -39,11 +47,11 @@
     <!-- Right Sidebar -->
 
     <!-- Main Content -->
-    <section class="content" th:replace="sample/sample :: sample"></section>
+    <th:block th:replace="${mainPath} :: ${mainId}"></th:block>
     <!-- Main Content -->
 
     <div class="jvectormap-tip"></div>
 
-
 </body>
+</th:block>
 </html>
