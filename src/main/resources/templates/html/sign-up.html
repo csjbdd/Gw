@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js " lang="en">
+<html class="no-js " lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -20,45 +20,44 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-12">
-                <form class="card auth_form">
+                <form class="card auth_form" method="post">
                     <div class="header">
-                        <img class="logo" src="assets/images/logo.svg" alt="">
-                        <h5>Sign Up</h5>
-                        <span>Register a new membership</span>
+                        <img class="logo" src="images/title_icon.svg" alt="">
+                        <h5>회원가입</h5>
+                        <span>이그라인에 오신걸 환영합니다!</span>
                     </div>
                     <div class="body">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Username">
+                            <input name="id" type="text" class="form-control" placeholder="아이디" maxlength="12">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                             </div>
                         </div>
+                        <div class="input-group mb-1">
+
+                        </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Enter Email">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
-                            </div>
-                        </div>                        
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Password">
+                            <input name="password" type="password" class="form-control" placeholder="패스워드" maxlength="12">
                             <div class="input-group-append">                                
                                 <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                             </div>                            
                         </div>
-                        <div class="checkbox">
-                            <input id="remember_me" type="checkbox">
-                            <label for="remember_me">I read and agree to the <a href="javascript:void(0);">terms of usage</a></label>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control" placeholder="패스워드 확인" maxlength="12">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
+                            </div>
                         </div>
-                        <a href="index.html" class="btn btn-primary btn-block waves-effect waves-light">SIGN UP</a>
+                        <input type="submit" class="btn btn-primary btn-block waves-effect waves-light" value="가입하기">
                         <div class="signin_with mt-3">
-                            <a class="link" href="sign-in.html">You already have a membership?</a>
+                            <a class="link" href="sign-in.html">이미 가입하셨나요?</a>
                         </div>
                     </div>
                 </form>
                 <div class="copyright text-center">
                     &copy;
                     <script>document.write(new Date().getFullYear())</script>,
-                    <span>Designed by <a href="https://thememakker.com/" target="_blank">ThemeMakker</a></span>
+                    <span>Designed by <a href="https://thememakker.com/" target="_blank">Egline</a></span>
                 </div>
             </div>
             <div class="col-lg-8 col-sm-12">
@@ -73,6 +72,89 @@
 
 <!-- Jquery Core Js -->
 <script src="assets/bundles/libscripts.bundle.js"></script>
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+<script>
+    var registerId = document.getElementById('registerid');
+    var registerPw = document.getElementById('registerpw');
+    var registerPw2 = document.getElementById('registerpw2');
+    var idLabel = document.getElementById('idlabel');
+    var pwLabel = document.getElementById('pwlabel');
+    var pwLabel2 = document.getElementById('pwlabel2');
+    registerId.focus();
+
+
+    const checkAll = () => {
+        if (!checkUserId(registerId.value)) {
+            return false;
+        } else if (!checkPassword(registerId.value, registerPw.value,registerPw2.value)) {
+            return false;
+        }
+        return false;
+    }
+
+    // 공백확인 함수
+    const checkExistData = (value, dataName) => {
+        if (value == "") {
+            alert(dataName + " 입력해주세요!");
+            return false;
+        }
+        return true;
+    }
+
+
+    const checkUserId = (id) => {
+        //Id가 입력되었는지 확인하기
+        if (!checkExistData(id, "아이디를")) {
+            return false;
+        }
+        let idRegExp = /^[a-zA-z0-9]{4,12}$/; //아이디 유효성 검사
+        if (!idRegExp.test(id)) {
+            idLabel.innerText="아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!";
+            idLabel.style.color="red";
+            registerId.focus();
+            return false;
+        }
+        return true; //확인이 완료되었을 때
+    }
+
+    const checkPassword = (id, password1, password2) => {
+        //비밀번호가 입력되었는지 확인하기
+        if (!checkExistData(password1, "비밀번호를"))
+            return false;
+        //비밀번호 확인이 입력되었는지 확인하기
+        if (!checkExistData(password2, "비밀번호 확인을"))
+            return false;
+
+        var password1RegExp = /^[a-zA-z0-9]{4,12}$/; //비밀번호 유효성 검사
+        if (!password1RegExp.test(password1)) {
+            alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+            registerPw.focus();
+            return false;
+        }
+        //비밀번호와 비밀번호 확인이 맞지 않다면..
+        if (password1 != password2) {
+            alert("두 비밀번호가 맞지 않습니다.");
+            registerPw2.focus();
+            return false;
+        }
+
+        //아이디와 비밀번호가 같을 때..
+        if (id == password1) {
+            alert("아이디와 비밀번호는 같을 수 없습니다!");
+            registerPw.value = "";
+            registerPw2.value = "";
+            registerPw2.focus();
+            return false;
+        }
+        return true; //확인이 완료되었을 때
+    }
+
+    registerId.addEventListener("change",()=>{
+        checkUserId(registerId.value);
+    })
+
+
+
+</script>
 </body>
 </html>
