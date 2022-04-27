@@ -26,7 +26,7 @@ public class RegisterController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerPage() {
 
-        return "register";
+        return "chat";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -35,6 +35,6 @@ public class RegisterController {
         String encodePassword = passwordEncoder.encode(rawPassword);
         list.put("password",encodePassword);
         commonService.insert("RegisterMapper.Register",list);
-        return "register";
+        return "chat";
     }
 }
