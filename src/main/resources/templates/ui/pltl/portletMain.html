@@ -1,135 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-    <title>Bold BS4 Cards with Hover Effect 50</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #efefef;
-            display: flex;
-        }
-
-        .portlet-main{
-            padding: 100px 0;
-            margin: 0 auto;
-        }
-
-        button {
-            width: 70px;
-            height: 70px;
-            border: none;
-            border-radius: 8px;
-            margin: 12px;
-            cursor: move;
-            font-size: 30px;
-            background: #ffffff;
-        }
-
-        .container {
-            margin: 10px;
-            padding: 10px;
-            background-color: #b5c1dc57;
-            border-radius: 8px;
-        }
-
-        .draggable.dragging {
-            opacity: 0.5;
-        }
-    </style>
 
 </head>
 <body>
-    <main class="portlet-main">
-        <div class="container">
-            <button class="draggable" draggable="true">🦊</button>
-            <button class="draggable" draggable="true">🐸</button>
-            <button class="draggable" draggable="true">🐶</button>
-            <button class="draggable" draggable="true">🐱</button>
-            <button class="draggable" draggable="true">🦁‍</button>
-            <button class="draggable" draggable="true">🐯‍</button>
-            <button class="draggable" draggable="true">🐷‍</button>
-            <button class="draggable" draggable="true">🙈</button>
-            <button class="draggable" draggable="true">🙉</button>
-            <button class="draggable" draggable="true">🙊</button>
-            <button class="draggable" draggable="true">🐵</button>
-            <button class="draggable" draggable="true">🦝</button>
-            <button class="draggable" draggable="true">🐴</button>
-            <button class="draggable" draggable="true">🦄</button>
-            <button class="draggable" draggable="true">🦬</button>
-            <button class="draggable" draggable="true">🐚</button>
-            <button class="draggable" draggable="true">🪰</button>
-            <button class="draggable" draggable="true">🏵️</button>
-            <button class="draggable" draggable="true">🌵</button>
-            <button class="draggable" draggable="true">🌰</button>
+<section class="content" th:fragment="portletMain">
+    <div class="body_scroll">
+        <div class="page-wrap">
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card task-board">
+                                <div class="card-header">
+                                    <h3>Todos</h3>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="ik ik-chevron-left action-toggle"></i></li>
+                                            <li><i class="ik ik-rotate-cw reload-card" data-loading-effect="pulse"></i></li>
+                                            <li><i class="ik ik-minus minimize-card"></i></li>
+                                            <li><i class="ik ik-x close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body todo-task">
+                                    <div class="dd" data-plugin="nestable">
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="1">
+                                                <div class="dd-handle">
+                                                    <h6>Dashbaord</h6>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <h6>New project</h6>
+                                                    <p>It is a long established fact that a reader will be distracted.</p>
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="3">
+                                                <div class="dd-handle">
+                                                    <h6>Feed Details</h6>
+                                                    <p>here are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>In Progress</h3>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="ik ik-chevron-left action-toggle"></i></li>
+                                            <li><i class="ik ik-rotate-cw reload-card" data-loading-effect="pulse"></i></li>
+                                            <li><i class="ik ik-minus minimize-card"></i></li>
+                                            <li><i class="ik ik-x close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body progress-task">
+                                    <div class="dd" data-plugin="nestable">
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="1">
+                                                <div class="dd-handle">
+                                                    <h6>New Code Update</h6>
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <h6>Meeting</h6>
+                                                    <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero</p>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Completed</h3>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="ik ik-chevron-left action-toggle"></i></li>
+                                            <li><i class="ik ik-rotate-cw reload-card" data-loading-effect="pulse"></i></li>
+                                            <li><i class="ik ik-minus minimize-card"></i></li>
+                                            <li><i class="ik ik-x close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body completed-task">
+                                    <div class="dd" data-plugin="nestable">
+                                        <ol class="dd-list">
+                                            <li class="dd-item" data-id="1">
+                                                <div class="dd-handle">
+                                                    <h6>Job title</h6>
+                                                    <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="2">
+                                                <div class="dd-handle">
+                                                    <h6>Event Done</h6>
+                                                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical</p>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
-
-
-    <script>
-        const draggables = document.querySelectorAll(".draggable");
-        const containers = document.querySelectorAll(".container");
-
-        draggables.forEach(draggable => {
-            draggable.addEventListener("dragstart", () => {
-                draggable.classList.add("dragging");
-            });
-
-            draggable.addEventListener("dragend", () => {
-                draggable.classList.remove("dragging");
-            });
-
-            draggable.addEventListener("dragenter", e => {
-                let container = containers[0]
-                if (e.target.className == "draggable") {
-                    container.insertBefore(draggable, afterElement);
-                    e.target.style.background = "purple";
-                }
-            });
-
-            draggable.addEventListener("dragleave", e => {
-                let container = containers[0]
-                if (e.target.className == "draggable") {
-                    container.insertBefore(draggable, afterElement);
-                    e.target.style.background = "purple";
-                }
-            });
-        });
-
-        containers.forEach(container => {
-            container.addEventListener("dragover", e => {
-                e.preventDefault();
-                const afterElement = getDragAfterElement(container, e.clientX);
-                const draggable = document.querySelector(".dragging");
-                if (afterElement === undefined) {
-                    container.appendChild(draggable);
-                } else {
-                    container.insertBefore(draggable, afterElement);
-                }
-            });
-        });
-
-        function getDragAfterElement(container, x) {
-            const elements = [
-                ...container.querySelectorAll(".draggable:not(.dragging)"),
-            ];
-
-            return elements.reduce(
-                (closest, child) => {
-                    const potlet = child.getBoundingClientRect();
-                    const offsetX = x - potlet.left - potlet.width / 2;
-                    if (offsetX < 0 && offsetX > closest.offset) {
-                        return { offset: offsetX, element: child };
-                    } else {
-                        return closest;
-                    }
-                },
-                { offset: Number.NEGATIVE_INFINITY },
-            ).element;
-        }
-
-    </script>
+    </div>
+</section>
 </body>
 </html>

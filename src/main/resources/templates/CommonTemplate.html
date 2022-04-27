@@ -8,6 +8,9 @@
     <th:block th:replace="layout/meta-data :: meta-data"></th:block>
     <!--메타데이터-->
 
+    <!--공통import-->
+    <th:block th:replace="layout/common-import :: commonImport"></th:block>
+    <!--공통import-->
 
     <!--템플릿별 헤드라인-->
     <th:block th:if="${headerYn == 'Y'}">
@@ -20,10 +23,10 @@
     <link rel="stylesheet" href="assets/css/CommonFont.css">
     <!--공통 폰트 적용-->
 </head>
-<body  class="theme-blush" _c_t_common="1"> <!-- theme-blush 세션값으로 사용자정보에 맞춰 불러와야함 -->
+<body  class="theme-blush"> <!-- theme-blush 세션값으로 사용자정보에 맞춰 불러와야함 -->
 
     <!-- 페이지 로딩CSS -->
-    <div class="page-loader-wrapper" style="display: none;">
+    <div class="page-loader-wrapper" style="">
         <div class="loader">
             <div class="m-t-30 "><img class="zmdi-hc-spin" src="assets/images/loader.svg" width="48" height="48" alt="Aero"></div>
             <p>Please wait...</p>
