@@ -1,0 +1,12 @@
+body{
+    font-family:'Roboto' ,'Noto Sans KR', 'sans-serif';
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Noto_Sans_KR/NotoSansKR-Regular.otf'),
+    url('../fonts/Noto_Sans_KR/NotoSansKR-Regular.otf') format('embedded-opentype'),
+    url('../fonts/Noto_Sans_KR/NotoSansKR-Regular.otf')  format('woff'),
+    url('../fonts/Noto_Sans_KR/NotoSansKR-Regular.otf') format('truetype');
+    unicode-range:U+AC00-D7A3; /*한글만적용*/
+}
