@@ -12,4 +12,9 @@
         ,   NOW()
         )
     </insert>
+    <select id="IdCheck" parameterType="map" resultType="map">
+        SELECT COUNT(*) as CNT
+          FROM usercheck
+         WHERE id = #{id}
+    </select>
 </mapper>
