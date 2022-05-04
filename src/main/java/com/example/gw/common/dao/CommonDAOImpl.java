@@ -17,12 +17,8 @@ import java.util.Map;
 @Repository
 public class CommonDAOImpl implements ICommonDAO{
 
-    private final SqlSession sqlsession;
-
     @Autowired
-    public CommonDAOImpl(SqlSession sqlsession) {
-        this.sqlsession = sqlsession;
-    }
+    private SqlSession sqlsession;
 
     /**
      * selectOne 메서드
