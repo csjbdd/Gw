@@ -36,7 +36,7 @@ public interface ICommonService {
      * @Create : 2022년 04월 23일
      */
     public List<Object> selectList(String statement, Map<String, Object> map) throws Exception;
-
+    public List<Object> selectList(String statement) throws Exception;
     /**
      * insert 메서드
      *

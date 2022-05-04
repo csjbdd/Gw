@@ -34,6 +34,7 @@ public interface ICommonDAO {
      */
     public List<Object> selectList(String statement, Map<String, Object> parameter) throws Exception;
     public List<Object> selectList(Map<String, Object> parameter, String statement) throws Exception;
+    public List<Object> selectList(String statement) throws Exception;
 
     /**
      * insert 메서드
