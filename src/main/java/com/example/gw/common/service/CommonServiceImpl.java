@@ -76,6 +76,15 @@ public class CommonServiceImpl implements ICommonService {
         }
         return result;
     }
+    public List<Object> selectList(String statement) throws Exception {
+        List<Object> result = null;
+        try{
+            result = CommonDAO.selectList(statement);
+        }catch (Exception e){
+            throw e;
+        }
+        return result;
+    }
 
     /**
      * insert 메서드

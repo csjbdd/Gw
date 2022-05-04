@@ -72,6 +72,10 @@ public class CommonDAOImpl implements ICommonDAO{
     public List<Object> selectList(Map<String, Object> parameter, String statement) throws Exception {
         return sqlsession.selectList(statement, parameter);
     }
+    @Override
+    public List<Object> selectList(String statement) throws Exception {
+        return sqlsession.selectList(statement);
+    }
 
     /**
      * insert 메서드
