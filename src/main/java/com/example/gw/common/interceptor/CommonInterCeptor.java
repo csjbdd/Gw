@@ -1,6 +1,7 @@
 package com.example.gw.common.interceptor;
 
 import com.example.gw.common.service.CommonServiceImpl;
+import com.example.gw.common.service.ICommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,7 +14,9 @@ import java.util.List;
 
 @Component
 public class CommonInterCeptor implements HandlerInterceptor {
-    private CommonServiceImpl commonService;
+    @Autowired
+    private ICommonService commonService;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
@@ -28,9 +31,8 @@ public class CommonInterCeptor implements HandlerInterceptor {
         request.getSession().setAttribute("mainPath", "sample/sample"); // 샘플 main의 경로
         request.getSession().setAttribute("mainId", "sample");          // 샘플 mainId
 
-//        menuList = commonService.selectList("MenuMapper.selectMenu");
-//        request.getSession().setAttribute("menuList", menuList);
-
+        menuList = commonService.selectList("MenuMapper.selectMenu");
+        request.getSession().setAttribute("menuList", menuList);
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

@@ -18,12 +18,9 @@ import java.util.Map;
 @Service
 public class CommonServiceImpl implements ICommonService {
 
+    @Autowired
     private ICommonDAO CommonDAO;
 
-    @Autowired
-    public CommonServiceImpl(ICommonDAO commonDAO){
-        this.CommonDAO = commonDAO;
-    }
 
     /**
      * DB 테스트

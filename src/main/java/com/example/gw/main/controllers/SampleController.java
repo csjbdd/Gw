@@ -1,6 +1,8 @@
 package com.example.gw.main.controllers;
 
 import com.example.gw.common.service.CommonServiceImpl;
+import com.example.gw.common.service.ICommonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +11,8 @@ import java.util.List;
 
 @Controller
 public class SampleController {
-    private CommonServiceImpl commonService;
+    @Autowired
+    private ICommonService commonService;
 
     @GetMapping("/sample")
     public String portletPage(Model model) throws Exception{
@@ -24,7 +27,7 @@ public class SampleController {
         model.addAttribute("mainId", "sample");          // 샘플 mainId
 
 
-//        menuList = commonService.selectList("MenuMapper.selectMenu");
+
 
         return "CommonTemplate"; // 무조건 CommonTemplate 로 경로지정(공통템플릿임)
     }
