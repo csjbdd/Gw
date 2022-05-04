@@ -1,6 +1,5 @@
 package com.example.gw.common.interceptor;
 
-import com.example.gw.common.service.CommonServiceImpl;
 import com.example.gw.common.service.ICommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,14 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CommonInterCeptor implements HandlerInterceptor {
+public class CommonInterceptor implements HandlerInterceptor {
     @Autowired
-    private ICommonService commonService;
-
+    ICommonService commonService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
