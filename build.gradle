@@ -50,3 +50,4 @@ war {
 
 bootWar.enabled = true
 war.enabled = false
+
