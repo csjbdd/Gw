@@ -33,8 +33,13 @@ public class CommonInterceptor implements HandlerInterceptor {
             resultPath = baseURL;
         }
 
-        menuList = commonService.selectList("MenuMapper.selectMenu");
-        request.getSession().setAttribute("menuList", menuList);
+        // 메뉴리스트 가져오기
+        if(request.getSession().getAttribute("menuList") == null) {
+            menuList = commonService.selectList("MenuMapper.selectMenu");
+            request.getSession().setAttribute("menuList", menuList);
+        }
+
+        // 템플릿id 가져오기
         request.getSession().setAttribute("menuName", menuName);
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
