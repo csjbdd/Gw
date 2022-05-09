@@ -15,7 +15,7 @@
 
     <!--템플릿별 헤드라인-->
     <th:block th:if="${headerYn == 'Y'}">
-        <th:block th:replace="${headerPath} :: ${headerId}"></th:block>
+        <th:block th:replace="'ui/' + ${headerPath} :: ${headerId}"></th:block>
     </th:block>
     <!--템플릿별 헤드라인-->
 
@@ -63,7 +63,7 @@
 
     <!-- 템플릿별 메뉴라인 -->
     <th:block th:if="${mainYn == 'Y'}">
-        <th:block th:replace="${mainPath} :: ${mainId}"></th:block>
+        <th:block th:replace="'ui/' + ${mainPath} :: ${mainId}"></th:block>
     </th:block>
     <!-- 템플릿별 메뉴라인 -->
 
