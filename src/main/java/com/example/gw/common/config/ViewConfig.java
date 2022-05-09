@@ -14,7 +14,7 @@ public class ViewConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(commonInterceptor)
-                .addPathPatterns("/**"); // 허용할 경로
-//                .excludePathPatterns();         // 금지할 경로
+                .addPathPatterns("/*/**.do") // 허용할 경로
+                .excludePathPatterns("/css/**", "/fonts/**", "/plugin/**", "/scripts/**");         // 금지할 경로
     }
 }
