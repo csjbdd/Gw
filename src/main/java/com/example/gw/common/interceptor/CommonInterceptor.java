@@ -23,7 +23,8 @@ public class CommonInterceptor implements HandlerInterceptor {
         String contextPath = request.getContextPath();
         String baseURL = host + contextPath;
         String requestURL = request.getRequestURI().toString();
-        String menuName = requestURL.replace(".do", "");
+        String menuName = requestURL.substring(requestURL.lastIndexOf("/")+1);
+               menuName = menuName.replace(".do", "");
                menuName = menuName.replace("/", "");
         String resultPath = baseURL + requestURL;
         List<Object> menuList = null;
@@ -34,29 +35,11 @@ public class CommonInterceptor implements HandlerInterceptor {
 
         menuList = commonService.selectList("MenuMapper.selectMenu");
         request.getSession().setAttribute("menuList", menuList);
+        request.getSession().setAttribute("menuName", menuName);
 
-        response.sendRedirect(resultPath);
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-//        String menuName = modelAndView.getModel().get("path").toString().replace(".do", "");
-//               menuName = menuName.replace("/", "");
-//
-//        // Header
-//        modelAndView.addObject("headerPath", menuName + "/" + menuName + "-header");
-//        modelAndView.addObject("headerId", menuName + "-header");
-//
-//        // Main
-//        modelAndView.addObject("mainPath", menuName + "/" + menuName);
-//        modelAndView.addObject("mainId", menuName + "-body");
-//
-//        // ViewName
-//        modelAndView.setViewName("CommonTemplate");
-//
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
-    }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)  throws Exception {
