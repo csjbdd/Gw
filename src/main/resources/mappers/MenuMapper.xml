@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MenuMapper">
-    <select id="selectMenu" resultType="map">
-        SELECT
-            main_id
-          , sub_id
-          , main_seq
-          , sub_seq
-          , main_nm
-          , sub_nm
-          , enabled
-          , icon
-        FROM MENU_MANAGER
+    <select id="selectMenuList" resultType="map">
+        with v_tmp as (
+            select MAIN_ID, count(SUB_SEQ) as CNT from MENU_MANAGER group by MAIN_ID
+        )
+        select a.MAIN_ID
+             ,  a.SUB_ID
+             ,  a.MAIN_SEQ
+             ,  a.SUB_SEQ
+             ,  a.MAIN_NM
+             ,  a.SUB_NM
+             ,  a.ENABLED
+             ,  a.ICON
+             ,	b.CNT
+        from MENU_MANAGER a
+                 inner join v_tmp b
+                            on a.MAIN_ID = b.MAIN_ID
         ORDER BY
             MAIN_SEQ,SUB_SEQ
+    </select>
+
+    <select id="selectMainList" resultType="map">
+        SELECT
+            MAIN_ID,
+            MAIN_SEQ,
+            MAIN_NM ,
+            COUNT(SUB_ID) CNT,
+            IF(COUNT(SUB_SEQ) > 1,
+               'NULL',
+               if ( SUB_SEQ = '', ENABLED, 'NULL')) ENABLED ,
+            ICON
+        FROM
+            MENU_MANAGER
+        GROUP BY
+            MAIN_ID
+        order by MAIN_SEQ
     </select>
 </mapper>
