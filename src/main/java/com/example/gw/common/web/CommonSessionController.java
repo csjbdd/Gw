@@ -18,7 +18,7 @@ public class CommonSessionController {
     public void saveSession(HttpServletRequest request) throws Exception {
         List<Object> menuList = null;
         HttpSession session = request.getSession();
-        menuList = commonService.selectList("MenuMapper.selectMenu");
+        menuList = commonService.selectList("MenuMapper.selectMenuList");
         session.setAttribute("menuList", menuList);
     }
 
