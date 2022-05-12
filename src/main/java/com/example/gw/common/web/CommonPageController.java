@@ -16,19 +16,21 @@ public class CommonPageController {
 
     @GetMapping("/*/**.do")
     public String commonPage(HttpServletRequest request, Model model) throws Exception{
-        String menuName = "";
-        menuName = CommonUtil.null2Str(request.getSession().getAttribute("menuName").toString(), "");
+        String subName = "";
+        String mainName = "";
+        subName = CommonUtil.null2Str(request.getSession().getAttribute("subName").toString(), "");
+        mainName = CommonUtil.null2Str(request.getSession().getAttribute("mainName").toString(), "");
 
-        if(!"".equals(menuName)) {
+        if(!"".equals(subName)) {
             // 샘플 header
             model.addAttribute("headerYn", "Y");
-            model.addAttribute("headerPath", menuName + "/" + menuName + "-header"); // header의 경로
-            model.addAttribute("headerId", menuName + "-header");          // headerId
+            model.addAttribute("headerPath", mainName + "/" + subName + "-header"); // header의 경로
+            model.addAttribute("headerId", subName + "-header");          // headerId
 
             // 샘플 main
             model.addAttribute("mainYn", "Y");
-            model.addAttribute("mainPath", menuName + "/" + menuName); // main의 경로
-            model.addAttribute("mainId", menuName + "-body");          // mainId
+            model.addAttribute("mainPath", mainName + "/" + subName); // main의 경로
+            model.addAttribute("mainId", subName + "-body");          // mainId
         }else{
             model.addAttribute("headerYn", "N");
             model.addAttribute("mainYn", "N");

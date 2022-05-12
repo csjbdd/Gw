@@ -26,9 +26,11 @@ public class CommonInterceptor implements HandlerInterceptor {
         String baseURL = host + contextPath;
         String requestURL = request.getRequestURI().toString();
 
-        String menuName = requestURL.substring(requestURL.lastIndexOf("/")+1);
-               menuName = menuName.replace(".do", "");
-               menuName = menuName.replace("/", "");
+        String urlStr = requestURL.substring(requestURL.indexOf("/")+1);
+        String mainName = urlStr.substring(0, urlStr.indexOf("/"));
+        String subName = requestURL.substring(requestURL.lastIndexOf("/")+1);
+               subName = subName.replace(".do", "");
+               subName = subName.replace("/", "");
 
         String resultPath = baseURL + requestURL;
         List<Object> menuList = null;
@@ -45,7 +47,8 @@ public class CommonInterceptor implements HandlerInterceptor {
             request.getSession().setAttribute("mainList", mainList);
 
         // 템플릿id 가져오기
-        request.getSession().setAttribute("menuName", menuName);
+        request.getSession().setAttribute("mainName", mainName);
+        request.getSession().setAttribute("subName", subName);
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
