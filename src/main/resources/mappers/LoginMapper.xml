@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LoginMapper">
+    <select id="Login" parameterType="map" resultType="map">
+        SELECT count(*) AS CNT
+          FROM usercheck
+         WHERE 1=1
+           AND id = #{id}
+           AND passowrd =#{password}
+    </select>
+</mapper>

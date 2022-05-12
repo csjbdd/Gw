@@ -30,6 +30,7 @@ public class LoginController {
 
     @PostMapping(value = "/")
     public String login(@RequestParam Map<String,Object> list) throws Exception {
+        Map<String,Object> map = commonService.selectOne("LoginMapper.Login",list);
 
         return "ui/login/sign-in";
     }

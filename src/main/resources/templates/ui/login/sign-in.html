@@ -13,6 +13,11 @@
    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
    <link rel="stylesheet" href="assets/css/style.min.css">
    <!--공통import-->
+   <style>
+      #guidelabel {
+         font-size: 11px;
+      }
+   </style>
 </head>
    <body class="theme-blush" _c_t_common="1">
       <div class="authentication">
@@ -32,28 +37,34 @@
                            </div>
                         </div>
                         <div class="input-group mb-3">
-                           <input type="text" class="form-control" placeholder="패스워드">
-                           <div class="input-group-append">                                
-                              <span class="input-group-text"><a href="../../html/forgot-password.html" class="forgot" title="Forgot Password"><i class="zmdi zmdi-lock"></i></a></span>
+                           <input type="password" class="form-control" placeholder="패스워드">
+                           <div class="input-group-append">
+                              <span class="input-group-text"><i id="pw-icon" class="zmdi zmdi-lock"></i></span>
                            </div>
                         </div>
+                        <label id="guidelabel"></label>
                         <div class="checkbox">
                            <input id="remember_me" type="checkbox">
                            <label for="remember_me">아이디 저장</label>
                         </div>
-                        <a href="index.html" class="btn btn-primary btn-block waves-effect waves-light">SIGN IN</a>                        
+                        <a href="index.html" class="btn btn-primary btn-block waves-effect waves-light">로그인</a>
                         <div class="signin_with mt-3">
-                           <p class="mb-0">or Sign Up using</p>
-                           <button class="btn btn-primary btn-icon btn-icon-mini btn-round facebook"><i class="zmdi zmdi-facebook"></i></button>
-                           <button class="btn btn-primary btn-icon btn-icon-mini btn-round twitter"><i class="zmdi zmdi-twitter"></i></button>
-                           <button class="btn btn-primary btn-icon btn-icon-mini btn-round google"><i class="zmdi zmdi-google-plus"></i></button>
+                           <div class="signin_with mt-3">
+                              <a class="link" href="/recoveryid">아이디를 잊어버리셨나요?</a>
+                           </div>
+                           <div class="signin_with mt-3">
+                              <a class="link" href="/recoverypw">비밀번호를 잊어버리셨나요?</a>
+                           </div>
+                           <div class="signin_with mt-3">
+                              <a class="link" href="/register">아직 가입을 안하셨나요?</a>
+                           </div>
                         </div>
                      </div>
                   </form>
                   <div class="copyright text-center">
                      ©
-                     <script>document.write(new Date().getFullYear())</script>2022,
-                     <span>Designed by <a href="https://thememakker.com/" target="_blank">ThemeMakker</a></span>
+                     <script>document.write(new Date().getFullYear())</script>
+                     <span>Designed by <a href="http://www.exciform.com/" target="_blank">Egline</a></span>
                   </div>
                </div>
                <div class="col-lg-8 col-sm-12">
