@@ -1,6 +1,9 @@
 package com.example.gw.common.interceptor;
 
 import com.example.gw.common.service.ICommonService;
+import org.json.JSONObject;
+import org.mybatis.logging.Logger;
+import org.mybatis.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -8,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -17,19 +21,31 @@ public class CommonInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+        String host = request.getHeader("host"); // localhost:8085
+        String contextPath = request.getContextPath();
+        String baseURL = host + contextPath;
+        String requestURL = request.getRequestURI().toString();
+
+        String menuName = requestURL.substring(requestURL.lastIndexOf("/")+1);
+               menuName = menuName.replace(".do", "");
+               menuName = menuName.replace("/", "");
+
+        String resultPath = baseURL + requestURL;
         List<Object> menuList = null;
+        List<Object> mainList = null;
 
-        // 샘플 header
-        request.getSession().setAttribute("headerYn", "Y");    // 샘플 header 적용여부
-        request.getSession().setAttribute("headerPath", "sample/sample-header"); // 샘플 header의 경로
-        request.getSession().setAttribute("headerId", "sample-header");          // 샘플 headerId
+        if(requestURL.equals("/")) {
+            resultPath = baseURL;
+        }
 
-        // 샘플 main
-        request.getSession().setAttribute("mainPath", "sample/sample"); // 샘플 main의 경로
-        request.getSession().setAttribute("mainId", "sample");          // 샘플 mainId
+        // 메뉴리스트 가져오기
+            menuList = commonService.selectList("MenuMapper.selectMenuList");
+            mainList = commonService.selectList("MenuMapper.selectMainList");
+            request.getSession().setAttribute("menuList", menuList);
+            request.getSession().setAttribute("mainList", mainList);
 
-        menuList = commonService.selectList("MenuMapper.selectMenu");
-        request.getSession().setAttribute("menuList", menuList);
+        // 템플릿id 가져오기
+        request.getSession().setAttribute("menuName", menuName);
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
@@ -40,7 +56,7 @@ public class CommonInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)  throws Exception {
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 }
