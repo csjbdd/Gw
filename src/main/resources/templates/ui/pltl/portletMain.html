@@ -1,10 +1,13 @@
 <!doctype html>
 <html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org" >
-<head>
+<head th:fragment="portlet-header">
+
+    <script src="assets/plugins/nestable/jquery.nestable.js"></script>
+    <script src="assets/js/pages/pltl/taskboard.js"></script>
 
 </head>
 <body>
-<section class="content" th:fragment="portletMain">
+<section class="content" th:fragment="portletMain-body">
     <div class="body_scroll">
         <div class="page-wrap">
             <div class="main-content">
