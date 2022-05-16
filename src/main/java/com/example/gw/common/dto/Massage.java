@@ -6,9 +6,9 @@ import java.util.Map;
 
 // restController 통신을 위한 DTO
 public class Massage {
-    private StatusEnum status;
-    private String message;
-    private Map<String, Object> data;
+    private StatusEnum status;          // 상태코드 : '200', 'OK'
+    private String message;             // 성공여부 메세지
+    private Map<String, Object> data;   // 데이터
     private long timeStamp;
 
 
