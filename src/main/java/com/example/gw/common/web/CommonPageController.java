@@ -24,7 +24,7 @@ public class CommonPageController {
         if(!"".equals(subName)) {
             // 샘플 header
             model.addAttribute("headerYn", "Y");
-            model.addAttribute("headerPath", mainName + "/" + subName + "-header"); // header의 경로
+            model.addAttribute("headerPath", mainName + "/" + subName); // header의 경로
             model.addAttribute("headerId", subName + "-header");          // headerId
 
             // 샘플 main
