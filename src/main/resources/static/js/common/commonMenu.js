@@ -1,7 +1,7 @@
 /**
  * menu 관련 공통클래스 함수
  */
-class commonMenu {
+class CommonMenu {
     constructor () { }
 
     /**

@@ -3,6 +3,12 @@
 <!-- 변수지정 -->
 <th:block th:with="userNm='홍길동'">
 
+    <script th:inline="javascript">
+        let CommonModule = {};
+        let menuData = [];
+        menuData = [[${session.menuList}]];
+    </script>
+
 <head>
 
     <!--메타데이터-->
@@ -25,12 +31,6 @@
     <!--공통 폰트 적용-->
 </head>
 <body  class="theme-blush"> <!-- theme-blush 세션값으로 사용자정보에 맞춰 불러와야함 -->
-
-<script th:inline="javascript">
-    let menuData = [];
-    menuData = [[${session.menuList}]];
-</script>
-
 <!--<span th:text="${session.menuList}"></span>-->
     <!-- 페이지 로딩CSS -->
     <div class="page-loader-wrapper" style="">

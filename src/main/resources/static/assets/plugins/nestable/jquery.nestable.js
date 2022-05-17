@@ -481,4 +481,16 @@
         return retval || lists;
     };
 
+    function nestable2Javascript(id, op, json) {
+        if(id && op && json) {
+            $(id).nestable(op, json);
+        }else if(id && op){
+            $(id).nestable(op);
+        }else if(id){
+            $(id).nestable();
+        }
+    }
+
+    CommonModule['nestable'] = nestable2Javascript;
+
 })(window.jQuery || window.Zepto, window, document);
