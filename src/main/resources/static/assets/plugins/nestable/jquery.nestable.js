@@ -41,7 +41,7 @@
             expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
             collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
             group           : 0,
-            maxDepth        : 5,
+            maxDepth        : 2,
             threshold       : 20
         };
 
@@ -480,5 +480,17 @@
 
         return retval || lists;
     };
+
+    function nestable2Javascript(id, op, json) {
+        if(id && op && json) {
+            $(id).nestable(op, json);
+        }else if(id && op){
+            $(id).nestable(op);
+        }else if(id){
+            $(id).nestable();
+        }
+    }
+
+    CommonModule['nestable'] = nestable2Javascript;
 
 })(window.jQuery || window.Zepto, window, document);
