@@ -10,8 +10,10 @@ $(document).ready(function() {
 });
 
 window.onload = () =>{
+    // 메뉴 경로 세팅
     let commonMenu = new CommonMenu();
     commonMenu.setContentHeader("manager/createMenu");
 
-    CommonModule.nestable('.dd');
+    // 메뉴포틀릿 세팅
+    CommonModule.nestable('.dd', {"maxDepth":2});
 }
