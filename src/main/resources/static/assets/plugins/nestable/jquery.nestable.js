@@ -1094,6 +1094,11 @@
         }
     }
 
+    function nestable2JavascriptValues(el){
+        return window.JSON.stringify($(el).nestable('serialize'));
+    }
+
     CommonModule['nestable'] = nestable2Javascript;
+    CommonModule['nestableValues'] = nestable2JavascriptValues;
 
 })(window.jQuery || window.Zepto, window, document);
