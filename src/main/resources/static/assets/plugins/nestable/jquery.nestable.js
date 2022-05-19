@@ -1086,11 +1086,11 @@
 
     function nestable2Javascript(id, op, json) {
         if(id && op && json) {
-            $(id).nestable(op, json);
+            return $(id).nestable(op, json);
         }else if(id && op){
-            $(id).nestable(op);
+            return $(id).nestable(op);
         }else if(id){
-            $(id).nestable();
+            return $(id).nestable();
         }
     }
 

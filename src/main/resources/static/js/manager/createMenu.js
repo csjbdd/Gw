@@ -18,8 +18,13 @@ const setEvent = () =>{
     const reflectMenu = document.getElementById('reflectMenu');
     const reflectTextarea = document.getElementById("reflectTextarea");
     reflectMenu.children[0].addEventListener('mouseup', (event) => {
-        reflectMenuList = CommonModule.nestableValues(reflectMenu);
-        reflectTextarea.innerText = reflectMenuList;
+        reflectMenuList = CommonModule.nestable('#reflectMenu', 'serialize');
+        reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
     });
+    var arr = [{"id":1},{"id":2,"children":[{"id":3},{"id":4}]},{"id":11},{"id":12}];
+    arr.forEach((ele) => {
+        CommonModule.nestable('#reflectMenu', 'add', ele);
+    })
 
+    // document.getElementById('dd-empty').remove();
 }
