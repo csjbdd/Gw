@@ -1,7 +1,8 @@
 /* 공통 JS */
-document.addEventListener("DOMContentLoaded", function(){
+class CommonAJAX {
+    constructor () { }
 
-    let _requestPutData = function(uri,jsonString){
+    _requestPutData = (uri,jsonString) => {
         //XMLHttpRequest 객체 생성
         let xhr = new XMLHttpRequest();
 
@@ -14,17 +15,18 @@ document.addEventListener("DOMContentLoaded", function(){
         //요청 전송
         xhr.send(jsonString); // <- JSON.stringify(data)를 해서 Body로 보내면됨
 
-        //비동기 통신일때
-        xhr.onload = () => {
-            if (xhr.response >= 1) {
-               alert(xhr.response);
-            } else {
-                alert("통신 실패");
+        return new Promise(function (resolve, reject) {
+            xhr.onload = () => {
+                if (xhr.response.length >= 1) {
+                    resolve(JSON.parse(xhr.response));
+                } else {
+                    reject(Error("통신 실패"));
+                }
             }
-        }
+        });
     }
 
-    let _requestSelectData = function(uri){
+    _requestSelectData = (uri) => {
         //XMLHttpRequest 객체 생성
         let xhr = new XMLHttpRequest();
 
@@ -37,17 +39,17 @@ document.addEventListener("DOMContentLoaded", function(){
         //요청 전송
         xhr.send(); // <- JSON.stringify(data)를 해서 Body로 보내면됨
 
-        //비동기 통신일때
-        xhr.onload = () => {
-            if (xhr.response >= 1) {
-                alert(xhr.response);
-            } else {
-                alert("통신 실패");
+        return new Promise(function (resolve, reject) {
+            xhr.onload = () => {
+                if (xhr.response.length >= 1) {
+                    resolve(JSON.parse(xhr.response));
+                } else {
+                    reject(Error("통신 실패"));
+                }
             }
-        }
+        });
     }
-
-});
+}
 
 
 

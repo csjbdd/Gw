@@ -9,7 +9,7 @@ public interface ICommonDAO {
      * selectOne 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     public Map<String, Object> selectOne(String statement, Map<String, Object> parameter) throws Exception;
@@ -20,7 +20,7 @@ public interface ICommonDAO {
      * selectString 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     public String selectString(String statement, Map<String, Object> parameter) throws Exception;
@@ -29,7 +29,7 @@ public interface ICommonDAO {
      * selectList 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     public List<Object> selectList(String statement, Map<String, Object> parameter) throws Exception;
@@ -40,7 +40,7 @@ public interface ICommonDAO {
      * insert 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     public int insert(String statement, Map<String, Object> parameter) throws Exception;
@@ -50,7 +50,7 @@ public interface ICommonDAO {
      * update 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     public int update(String statement, Map<String, Object> parameter) throws Exception;
@@ -60,7 +60,7 @@ public interface ICommonDAO {
      * delete 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     public int delete(String statement, Map<String, Object> parameter) throws Exception;
