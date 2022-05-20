@@ -15,15 +15,32 @@
  * @version 1.0
  */
 let commonMenu;
+let commonAJAX;
+
 let reflectMenu;
 let reflectTextarea;
-let reflectMenuList;
+let notUsedMenu;
+let notUsedTextarea;
+let deleteMenu;
+let deleteTextarea;
 
 window.onload = () =>{
+    // 공통 메뉴클래스 선언
     commonMenu = new CommonMenu();
+    // 공통 AJAX클래스 선언
+    commonAJAX = new CommonAJAX();
+
+    // 등록할 메뉴리스트 선언
     reflectMenu = document.getElementById('reflectMenu');
     reflectTextarea = document.getElementById("reflectTextarea");
-    reflectMenuList = [];
+
+    // 미사용 메뉴리스트 선언
+    notUsedMenu = document.getElementById('notUsedMenu');
+    notUsedTextarea = document.getElementById("notUsedTextarea");
+
+    // 삭제할 메뉴리스트 선언
+    deleteMenu = document.getElementById('deleteMenu');
+    deleteTextarea = document.getElementById("deleteTextarea");
     initPage();
 }
 
@@ -51,10 +68,19 @@ const initPage = () => {
  * @version 1.0
  */
 const setEvent = () => {
+    let reflectMenuList = [];
+    let notUsedMenuList = [];
+
     // 반영될 메뉴리스트 이벤트
     reflectMenu.children[0].addEventListener('mouseup', (event) => {
         reflectMenuList = CommonModule.nestable('#reflectMenu', 'serialize');
         reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
+    });
+
+    // 미사용 메뉴리스트 이벤트
+    notUsedMenu.children[0].addEventListener('mouseup', (event) => {
+        notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
+        notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
     });
 
     setMenuList();
@@ -70,11 +96,38 @@ const setEvent = () => {
  * @version 1.0
  */
 const setMenuList = () => {
+    let reflectMenuList = [];
+    let notUsedMenuList = [];
+
     // 반영될 메뉴리스트 데이터 추가
     var arr = [{"id":1},{"id":2,"children":[{"id":3},{"id":4}]},{"id":11},{"id":12}];
     CommonModule.nestable('#reflectMenu', 'remove', "sample");
     arr.forEach((ele) => {
         CommonModule.nestable('#reflectMenu', 'add', ele);
     })
-    reflectTextarea.innerText = window.JSON.stringify(CommonModule.nestable('#reflectMenu', 'serialize'));
+    reflectMenuList = CommonModule.nestable('#reflectMenu', 'serialize');
+    reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
+
+    // 미사용 메뉴리스트 데이터 추가
+    var arr = [{"id":1},{"id":2,"children":[{"id":3},{"id":4}]},{"id":11},{"id":12}];
+    CommonModule.nestable('#notUsedMenu', 'remove', "sample");
+    arr.forEach((ele) => {
+        CommonModule.nestable('#notUsedMenu', 'add', ele);
+    })
+    notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
+    notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
+
+
+    commonAJAX._requestSelectData("/manager/findMenuList").then(
+    (success) => {
+        debugger;
+        // 성공시
+        console.log(success);
+    },
+    (error) => {
+        debugger;
+        // 실패시
+        console.log(error);
+    })
+
 }

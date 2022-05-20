@@ -43,7 +43,7 @@
                             </div>
                             <div class="body">
                                 <p>메뉴리스트에는 등록이 되었지만 사용하지 않는 메뉴입니다.</p>
-                                <div class="dd nestable-blue-theme">
+                                <div class="dd nestable-blue-theme" id="notUsedMenu">
                                     <ol class='dd-list dd3-list'>
                                         <li class="dd-item" data-id="sample">
                                             <div class="dd-handle">sample</div>
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="mt-4">
                                     <b>Output JSON</b>
-                                    <textarea cols="30" rows="3" class="form-control no-resize" readonly>[{"id":13},{"id":14},{"id":15,"children":[{"id":17},{"id":16},{"id":18}]}]</textarea>
+                                    <textarea cols="30" rows="3" class="form-control no-resize" id="notUsedTextarea" readonly></textarea>
                                 </div>
                             </div>
                         </div>
@@ -72,13 +72,13 @@
                             </div>
                             <div class="body">
                                 <p>삭제할 메뉴를 여기에 옮기고 삭제버튼을 클릭해야 적용됩니다.</p>
-                                <div class="dd nestable-red-theme">
+                                <div class="dd nestable-red-theme" id="deleteMenu">
                                     <ol class='dd-list dd3-list'>
                                     </ol>
                                 </div>
                                 <div class="mt-4">
                                     <b>Output JSON</b>
-                                    <textarea cols="30" rows="3" class="form-control no-resize" readonly>[{"id":1},{"id":2,"children":[{"id":3},{"id":4},{"id":5,"children":[{"id":6},{"id":7},{"id":8}]},{"id":9},{"id":10}]},{"id":11},{"id":12}]</textarea>
+                                    <textarea cols="30" rows="3" class="form-control no-resize" id="deleteTextarea" readonly></textarea>
                                 </div>
                             </div>
                         </div>
@@ -114,13 +114,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Draggable Handles -->
-                <div class="row clearfix">
-                    <div class="col-lg-2 col-md-2 col-sm-2">
-
                     </div>
                 </div>
             </div>

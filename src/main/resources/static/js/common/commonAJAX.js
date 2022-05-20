@@ -17,8 +17,8 @@ class CommonAJAX {
 
         return new Promise(function (resolve, reject) {
             xhr.onload = () => {
-                if (xhr.response >= 1) {
-                    resolve(xhr.response);
+                if (xhr.response.length >= 1) {
+                    resolve(JSON.parse(xhr.response));
                 } else {
                     reject(Error("통신 실패"));
                 }
@@ -41,8 +41,8 @@ class CommonAJAX {
 
         return new Promise(function (resolve, reject) {
             xhr.onload = () => {
-                if (xhr.response >= 1) {
-                    resolve(xhr.response);
+                if (xhr.response.length >= 1) {
+                    resolve(JSON.parse(xhr.response));
                 } else {
                     reject(Error("통신 실패"));
                 }
