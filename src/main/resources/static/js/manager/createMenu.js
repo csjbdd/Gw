@@ -14,13 +14,16 @@
  * @Create : 2022년 05월 20일
  * @version 1.0
  */
-const commonMenu = new CommonMenu();
-const reflectMenu = document.getElementById('reflectMenu');
-const reflectTextarea = document.getElementById("reflectTextarea");
-let reflectMenuList = [];
-
+let commonMenu;
+let reflectMenu;
+let reflectTextarea;
+let reflectMenuList;
 
 window.onload = () =>{
+    commonMenu = new CommonMenu();
+    reflectMenu = document.getElementById('reflectMenu');
+    reflectTextarea = document.getElementById("reflectTextarea");
+    reflectMenuList = [];
     initPage();
 }
 
@@ -69,8 +72,9 @@ const setEvent = () => {
 const setMenuList = () => {
     // 반영될 메뉴리스트 데이터 추가
     var arr = [{"id":1},{"id":2,"children":[{"id":3},{"id":4}]},{"id":11},{"id":12}];
-    CommonModule.nestable('#reflectMenu', 'remove', 1);
+    CommonModule.nestable('#reflectMenu', 'remove', "sample");
     arr.forEach((ele) => {
         CommonModule.nestable('#reflectMenu', 'add', ele);
     })
+    reflectTextarea.innerText = window.JSON.stringify(CommonModule.nestable('#reflectMenu', 'serialize'));
 }
