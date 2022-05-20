@@ -119,15 +119,19 @@ const setMenuList = () => {
 
 
     commonAJAX._requestSelectData("/manager/findMenuList").then(
-    (success) => {
-        debugger;
-        // 성공시
-        console.log(success);
-    },
-    (error) => {
-        debugger;
-        // 실패시
-        console.log(error);
-    })
+        (success) => {
+            debugger;
+            // 성공시
+            console.log(success);
+        },
+        (error) => {
+            debugger;
+            // 실패시
+            console.log(error);
+        }
+    )
 
 }
+
+// 아이콘
+// <i class="zmdi zmdi-home"></i> <span> </span>
