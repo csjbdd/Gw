@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Sqlsession 처리를 위한 서비스 클래스
  *
- * @Author : 송기환
+ * @Author : ihatelua
  * @Create : 2022년 04월 23일
  * @version 1.0
  */
@@ -26,7 +26,7 @@ public class CommonServiceImpl implements ICommonService {
      * DB 테스트
      * 파라미터의 값을 출력해준다.
      *
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 23일
      */
     public String test(Map<String, Object> parameter) throws Exception {
@@ -45,7 +45,7 @@ public class CommonServiceImpl implements ICommonService {
     /**
      * selectOne 메서드
      *
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 23일
      */
     public Map<String, Object> selectOne(String statement, Map<String, Object> parameter) throws Exception {
@@ -61,7 +61,7 @@ public class CommonServiceImpl implements ICommonService {
     /**
      * selectList 메서드
      *
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 23일
      */
     public List<Object> selectList(String statement, Map<String, Object> parameter) throws Exception {
@@ -86,7 +86,7 @@ public class CommonServiceImpl implements ICommonService {
     /**
      * insert 메서드
      *
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 23일
      */
     public int insert(String statement, Map<String, Object> parameter) throws Exception {
@@ -102,7 +102,7 @@ public class CommonServiceImpl implements ICommonService {
     /**
      * update 메서드
      *
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 23일
      */
     public int update(String statement, Map<String, Object> parameter) throws Exception {
@@ -118,7 +118,7 @@ public class CommonServiceImpl implements ICommonService {
     /**
      * delete 메서드
      *
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 23일
      */
     public int delete(String statement, Map<String, Object> parameter) throws Exception {

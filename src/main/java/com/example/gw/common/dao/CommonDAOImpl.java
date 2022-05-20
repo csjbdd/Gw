@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Sqlsession 처리를 위한 DAO 클래스
  *
- * @Author : 송기환
+ * @Author : ihatelua
  * @Create : 2022년 04월 24일
  * @version 1.0
  */
@@ -24,7 +24,7 @@ public class CommonDAOImpl implements ICommonDAO{
      * selectOne 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     @Override
@@ -45,7 +45,7 @@ public class CommonDAOImpl implements ICommonDAO{
      * selectString 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     @Override
@@ -57,7 +57,7 @@ public class CommonDAOImpl implements ICommonDAO{
      * selectList 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     @Override
@@ -77,7 +77,7 @@ public class CommonDAOImpl implements ICommonDAO{
      * insert 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     @Override
@@ -93,7 +93,7 @@ public class CommonDAOImpl implements ICommonDAO{
      * update 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     @Override
@@ -109,7 +109,7 @@ public class CommonDAOImpl implements ICommonDAO{
      * delete 메서드
      * @param statement - mapper xml ID
      * @param parameter - sql binding 객체
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 24일
      */
     @Override

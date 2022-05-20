@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * DB 테스트를 위한 컨트롤러
  *
- * @Author : 송기환
+ * @Author : ihatelua
  * @Create : 2022년 04월 23일
  * @version 1.0
  */
@@ -25,7 +25,7 @@ public class DBTestController {
     /**
      * CommonService 테스트
      *
-     * @Author : 송기환
+     * @Author : ihatelua
      * @Create : 2022년 04월 23일
      */
     @GetMapping("/DBTest1")
