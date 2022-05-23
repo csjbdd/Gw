@@ -67,7 +67,6 @@ window.onload = () =>{
 const initPage = () => {
     commonMenu.setContentHeader("manager/createMenu");      // 메뉴 경로 세팅
     CommonModule.nestable('.dd', {"maxDepth":2});    // 메뉴포틀릿 세팅
-
     setEvent();
 }
 
