@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="createMenu-header">
     <script src="/assets/plugins/nestable/jquery.nestable.js"></script> <!-- Jquery Nestable -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css"><!-- bootstrap select -->
+
     <script src="/js/manager/createMenu.js"></script>
 </head>
 <body>
@@ -27,19 +29,10 @@
             <div class="container-fluid">
                 <div class="row clearfix">
                     <!-- Default Example -->
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-4 col-md-4">
                         <div class="card">
                             <div class="header">
-                                <h2><strong>미사용</strong> 메뉴</h2>
-                                <ul class="header-dropdown">
-                                    <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0);">추가</a></li>
-                                            <li><a href="javascript:void(0);">삭제</a></li>
-                                            <li><a href="javascript:void(0);">저장</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                <h2><strong>미사용 메뉴</strong> 리스트</h2>
                             </div>
                             <div class="body">
                                 <p>메뉴리스트에는 등록이 되었지만 사용하지 않는 메뉴입니다.</p>
@@ -60,15 +53,7 @@
 
                         <div class="card">
                             <div class="header">
-                                <h2><strong>삭제할</strong> 메뉴</h2>
-                                <ul class="header-dropdown">
-                                    <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0);">삭제</a></li>
-                                            <li><a href="javascript:void(0);">저장</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                <h2><strong>삭제할 메뉴</strong> 리스트</h2>
                             </div>
                             <div class="body">
                                 <p>삭제할 메뉴를 여기에 옮기고 삭제버튼을 클릭해야 적용됩니다.</p>
@@ -85,19 +70,10 @@
 
 
                     </div>
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-4 col-md-4">
                         <div class="card">
                             <div class="header">
                                 <h2><strong>사용될 메뉴</strong> 리스트</h2>
-                                <ul class="header-dropdown">
-                                    <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0);">추가</a></li>
-                                            <li><a href="javascript:void(0);">삭제</a></li>
-                                            <li><a href="javascript:void(0);">저장</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
                             </div>
                             <div class="body">
                                 <p>사용자에게 표시할 메뉴를 옮기고 저장버튼을 눌러야 적용됩니다.</p>
@@ -115,6 +91,70 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-4">
+
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>메뉴수정 및 등록</strong> 폼</h2>
+                            </div>
+                            <div class="body">
+                                <p>
+                                    <b>추가버튼</b> : 메뉴 정보를 입력할 수 있도록 입력란이 초기화됩니다.<br>
+                                    <b>등록버튼</b> : 입력한 메뉴 정보로 '사용될 메뉴 리스트'에 생성됩니다.<br>
+                                    <b>저장버튼</b> : 이동한 포틀릿정보에 따라 메뉴정보가 최종저장 됩니다.<br>
+                                </p>
+
+
+                                <div class="row clearfix">
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div class="form-group">
+                                            <div class="btn-group bootstrap-select form-control show-tick">
+                                                <select class="form-control show-tick" tabindex="-98">
+                                                    <option selected>메뉴 선택</option>
+                                                    <option>Ketchup</option>
+                                                    <option>Relish</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="font-bold">대분류 이름</label>
+                                        <input type="text" class="form-control" placeholder="대분류 이름">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="font-bold">대분류 ID</label>
+                                        <input type="text" class="form-control" placeholder="대분류 ID">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="font-bold">소분류 이름</label>
+                                        <input type="text" class="form-control" placeholder="소분류 이름">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="font-bold">소분류 ID</label>
+                                        <input type="text" class="form-control" placeholder="소분류 ID">
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-raised btn-primary btn-round waves-effect">추가</button>
+                                        <button type="button" class="btn btn-raised btn-info btn-round waves-effect">등록</button>
+                                    </div>
+                                    <div class="col-sm-6 align-right">
+                                        <button type="button" class="btn btn-raised btn-success btn-round waves-effect">저장</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
                 </div>
             </div>
         </div>

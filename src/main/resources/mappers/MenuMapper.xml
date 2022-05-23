@@ -37,4 +37,27 @@
             MAIN_ID
         order by MAIN_SEQ
     </select>
+
+    <select id="selectManagerMenuList" resultType="map">
+        with v_tmp as (
+            select IF(COUNT(SUB_SEQ) > 1,
+                      'NULL',
+                      if ( SUB_SEQ = '', ENABLED, 'NULL')) SUB_ENABLED, count(SUB_SEQ) as CNT, MAIN_ID from MENU_MANAGER group by MAIN_ID
+        )
+        select a.MAIN_ID
+             ,  a.SUB_ID
+             ,  a.MAIN_SEQ
+             ,  a.SUB_SEQ
+             ,  a.MAIN_NM
+             ,  a.SUB_NM
+             ,  a.ENABLED
+             ,  a.ICON
+             ,	b.CNT
+             ,	b.SUB_ENABLED
+        from MENU_MANAGER a
+                 inner join v_tmp b
+                            on a.MAIN_ID = b.MAIN_ID
+        ORDER BY
+            MAIN_SEQ,SUB_SEQ
+    </select>
 </mapper>

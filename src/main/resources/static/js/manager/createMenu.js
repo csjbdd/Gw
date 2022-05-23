@@ -17,6 +17,7 @@
 let commonMenu;
 let commonAJAX;
 
+let menuList;
 let reflectMenu;
 let reflectTextarea;
 let notUsedMenu;
@@ -24,6 +25,17 @@ let notUsedTextarea;
 let deleteMenu;
 let deleteTextarea;
 
+let currentMenu = [];
+let disabledMenu = [];
+
+
+/**
+ * 페이지 로드후
+ *
+ * @Author : ihatelua
+ * @Create : 2022년 05월 20일
+ * @version 1.0
+ */
 window.onload = () =>{
     // 공통 메뉴클래스 선언
     commonMenu = new CommonMenu();
@@ -55,7 +67,6 @@ window.onload = () =>{
 const initPage = () => {
     commonMenu.setContentHeader("manager/createMenu");      // 메뉴 경로 세팅
     CommonModule.nestable('.dd', {"maxDepth":2});    // 메뉴포틀릿 세팅
-
     setEvent();
 }
 
@@ -83,13 +94,62 @@ const setEvent = () => {
         notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
     });
 
-    setMenuList();
-    // document.getElementById('dd-empty').remove();
+    findMenuList();
+}
+
+/**
+ * 메뉴관리 리스트 가져오기
+ * 서버에서 메뉴데이터를 가져온다.
+ *
+ * @Author : ihatelua
+ * @Create : 2022년 05월 23일
+ * @version 1.0
+ */
+const findMenuList = () => {
+    commonAJAX._requestSelectData("/manager/findMenuList").then(
+        async (success) => {
+            // 가져온 데이터를 정제한다.
+            // 활성화된 메뉴리스트 : 대분류 데이터
+            // 비활성화된 메뉴리스트
+            let mainList = [];
+            menuList = success.data.menuList;
+            for (const menu of menuList) {
+                if(menu.SUB_ENABLED == "NULL"){
+                    if(mainList.indexOf(menu.MAIN_ID) == -1){
+                        mainList.push(menu.MAIN_ID);
+                        currentMenu.push({id: menu.MAIN_NM, foo: menu.MAIN_ID, children: []});
+                    }
+                }else if(menu.SUB_ENABLED != 0){
+                    currentMenu.push({id: menu.MAIN_NM, foo: menu.MAIN_ID});
+                }else{
+                    disabledMenu.push({id: menu.MAIN_NM, foo: menu.MAIN_ID});
+                }
+            }
+        },
+        (error) => {
+            // 실패시
+            console.log(error);
+        }
+    ).then(() => {
+        // 정제된 활성화된 메뉴리스트에서 소분류 데이터를 정제하여 넣어준다.
+        let cnt = 0;
+        for(const menu of currentMenu){
+            if(menu.children){
+                for (const sub of menuList) {
+                    if(sub.MAIN_ID == menu.foo){
+                        currentMenu[cnt].children.push({id:sub.SUB_NM, foo:sub.SUB_ID});
+                    }
+                }
+            }
+            cnt++;
+        }
+        setMenuList();
+    })
 }
 
 /**
  * 메뉴관리 리스트 세팅
- * 메뉴관리 리스트의 데이터를 가져온다.
+ * 메뉴관리 리스트의 데이터를 화면에 뿌려준다.
  *
  * @Author : ihatelua
  * @Create : 2022년 05월 20일
@@ -100,7 +160,7 @@ const setMenuList = () => {
     let notUsedMenuList = [];
 
     // 반영될 메뉴리스트 데이터 추가
-    var arr = [{"id":1},{"id":2,"children":[{"id":3},{"id":4}]},{"id":11},{"id":12}];
+    var arr = currentMenu;
     CommonModule.nestable('#reflectMenu', 'remove', "sample");
     arr.forEach((ele) => {
         CommonModule.nestable('#reflectMenu', 'add', ele);
@@ -109,29 +169,15 @@ const setMenuList = () => {
     reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
 
     // 미사용 메뉴리스트 데이터 추가
-    var arr = [{"id":1},{"id":2,"children":[{"id":3},{"id":4}]},{"id":11},{"id":12}];
+    var arr = disabledMenu;
     CommonModule.nestable('#notUsedMenu', 'remove', "sample");
     arr.forEach((ele) => {
         CommonModule.nestable('#notUsedMenu', 'add', ele);
     })
     notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
     notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
-
-
-    commonAJAX._requestSelectData("/manager/findMenuList").then(
-        (success) => {
-            debugger;
-            // 성공시
-            console.log(success);
-        },
-        (error) => {
-            debugger;
-            // 실패시
-            console.log(error);
-        }
-    )
-
 }
+
 
 // 아이콘
 // <i class="zmdi zmdi-home"></i> <span> </span>
