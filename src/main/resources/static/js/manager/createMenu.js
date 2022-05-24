@@ -7,38 +7,33 @@
  */
 
 
-/**
+/******************************************************************************
  * 전역변수 선언
- * 공통적으로 쓰이는 변수를 선언한다.
- *
- * @Author : ihatelua
- * @Create : 2022년 05월 20일
- * @version 1.0
- */
-
-
+ ******************************************************************************/
 let commonMenu;
 let commonAJAX;
 
-let reflectMenu;
-let reflectTextarea;
-let notUsedMenu;
-let notUsedTextarea;
-let deleteMenu;
-let deleteTextarea;
+let reflectMenu;        // 반영될 메뉴 포틀릿
+let notUsedMenu;        // 비활성화 메뉴 포틀릿
+let deleteMenu;         // 삭제할 메뉴 포틀릿
 
+// 테스트용 전역변수 지울예정
+let deleteTextarea;
+let reflectTextarea;
+let notUsedTextarea;
+
+// 데이터리스트
 let menuList;           // 메뉴 전체 리스트
 let currentMenu = [];   // 현재 활성화된 리스트
 let disabledMenu = [];  // 현재 비활성화된 리스트
 
+let selectMenuForm = [];
 
-/**
+
+
+/******************************************************************************
  * 페이지 로드후
- *
- * @Author : ihatelua
- * @Create : 2022년 05월 20일
- * @version 1.0
- */
+ ******************************************************************************/
 window.onload = () =>{
     // 공통 메뉴클래스 선언
     commonMenu = new CommonMenu();
@@ -61,7 +56,7 @@ window.onload = () =>{
 
 
 /**
- * 기본적인 페이지 선언
+ * 페이지 초기화
  * 페이지가 로드가 될때 필요한 모듈을 선언한다.
  *
  * @Author : ihatelua
@@ -98,6 +93,11 @@ const setEvent = () => {
     notUsedMenu.children[0].addEventListener('mouseup', (event) => {
         notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
         notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
+    });
+
+    // 메뉴폼 셀렉트박스 이벤트처리
+    selectMenuList.addEventListener("change", (event) => {
+debugger;
     });
 
     findMenuList();
@@ -205,25 +205,75 @@ const bindComponent = () => {
     let selectIcon = document.getElementById('selectIconList');
     for(let cnt = 0; cnt < size; cnt++){
         // 요소 생성
-        let li = document.createElement('li');
-        let a = document.createElement('a');
-        let i = document.createElement('i');
+        let liNode = document.createElement('li');
+        let aNode = document.createElement('a');
+        let iNode = document.createElement('i');
 
         // 요소추가
-        let liItem = selectIcon.appendChild(li);
-        liItem.className = "col-lg-1 col-md-1 col-sm-1 nav-item";
-        let aItem = liItem.appendChild(a);
+        let liItem = selectIcon.appendChild(liNode);
+        liItem.className = "nav-item";
+        liItem.style = "margin: auto;"
+        let aItem = liItem.appendChild(aNode);
         aItem.className = "nav-link";
         aItem.setAttribute("data-toggle", "tab");
-        aItem.style = "border:0px"
+        aItem.style = "border:0px; padding: 0.2rem; margin: auto;"
 
         // 아이콘 추가
-        let iItem = aItem.appendChild(i);
+        let iItem = aItem.appendChild(iNode);
         iItem.className = "zmdi zmdi-" + iconArr[cnt];
     }
+
+    // 메뉴 셀렉트박스
+    let selectMenuList = document.getElementById("selectMenuList");
+    menuList.forEach((ele, i) => {
+        // option node 생성
+        let optionNode = document.createElement("option");
+
+        if(i == 0){
+            optionNode.selected = true;
+            optionNode.innerHTML = "메뉴 선택";
+        } else if(ele.SUB_NM){
+            optionNode.id = ele.SUB_ID;
+            optionNode.innerHTML = ele.SUB_NM;
+            selectMenuForm.push({id:ele.SUB_ID, name:ele.SUB_NM});
+        } else{
+            optionNode.id = ele.MAIN_ID;
+            optionNode.innerHTML = ele.MAIN_NM;
+            selectMenuForm.push({id:ele.MAIN_ID, name:ele.MAIN_NM});
+        }
+
+        selectMenuList.appendChild(optionNode);
+    });
+
+
+
 
 }
 
 
-// 아이콘
-// <i class="zmdi zmdi-home"></i> <span> </span>
+
+
+
+
+
+
+
+/******************************************************************************
+ * 메서드
+ ******************************************************************************/
+
+/**
+ * 아이콘 선택 비활성화
+ * 활성화된 아이콘을 비활성화 시킨다.
+ *
+ * @Author : ihatelua
+ * @Create : 2022년 05월 24일
+ * @version 1.0
+ */
+const iconChangeActive = () => {
+    let selectIconList = document.getElementById("selectIconList");
+    let icon = selectIconList.getElementsByClassName("nav-link active");
+    if(icon.length > 0){
+        icon[0].className = "nav-link"
+    }
+}
