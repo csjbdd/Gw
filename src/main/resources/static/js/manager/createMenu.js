@@ -6,6 +6,7 @@
  * @version 1.0
  */
 
+
 /**
  * 전역변수 선언
  * 공통적으로 쓰이는 변수를 선언한다.
@@ -14,10 +15,11 @@
  * @Create : 2022년 05월 20일
  * @version 1.0
  */
+
+
 let commonMenu;
 let commonAJAX;
 
-let menuList;
 let reflectMenu;
 let reflectTextarea;
 let notUsedMenu;
@@ -25,8 +27,9 @@ let notUsedTextarea;
 let deleteMenu;
 let deleteTextarea;
 
-let currentMenu = [];
-let disabledMenu = [];
+let menuList;           // 메뉴 전체 리스트
+let currentMenu = [];   // 현재 활성화된 리스트
+let disabledMenu = [];  // 현재 비활성화된 리스트
 
 
 /**
@@ -56,6 +59,7 @@ window.onload = () =>{
     initPage();
 }
 
+
 /**
  * 기본적인 페이지 선언
  * 페이지가 로드가 될때 필요한 모듈을 선언한다.
@@ -67,8 +71,10 @@ window.onload = () =>{
 const initPage = () => {
     commonMenu.setContentHeader("manager/createMenu");      // 메뉴 경로 세팅
     CommonModule.nestable('.dd', {"maxDepth":2});    // 메뉴포틀릿 세팅
+
     setEvent();
 }
+
 
 /**
  * 이벤트 선언
@@ -96,6 +102,7 @@ const setEvent = () => {
 
     findMenuList();
 }
+
 
 /**
  * 메뉴관리 리스트 가져오기
@@ -147,6 +154,7 @@ const findMenuList = () => {
     })
 }
 
+
 /**
  * 메뉴관리 리스트 세팅
  * 메뉴관리 리스트의 데이터를 화면에 뿌려준다.
@@ -176,6 +184,44 @@ const setMenuList = () => {
     })
     notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
     notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
+
+    bindComponent();
+}
+
+
+/**
+ * 메뉴관리 컴포넌트 세팅
+ * 가져온 데이터를 컴포넌트에 바인딩하고
+ * 이벤트를 설정한다.
+ *
+ * @Author : ihatelua
+ * @Create : 2022년 05월 23일
+ * @version 1.0
+ */
+const bindComponent = () => {
+    // 아이콘 세팅
+    let iconArr = iconJSON.id;  // icon 리스트파일 가져오기
+    let size = iconArr.length;
+    let selectIcon = document.getElementById('selectIconList');
+    for(let cnt = 0; cnt < size; cnt++){
+        // 요소 생성
+        let li = document.createElement('li');
+        let a = document.createElement('a');
+        let i = document.createElement('i');
+
+        // 요소추가
+        let liItem = selectIcon.appendChild(li);
+        liItem.className = "col-lg-1 col-md-1 col-sm-1 nav-item";
+        let aItem = liItem.appendChild(a);
+        aItem.className = "nav-link";
+        aItem.setAttribute("data-toggle", "tab");
+        aItem.style = "border:0px"
+
+        // 아이콘 추가
+        let iItem = aItem.appendChild(i);
+        iItem.className = "zmdi zmdi-" + iconArr[cnt];
+    }
+
 }
 
 
