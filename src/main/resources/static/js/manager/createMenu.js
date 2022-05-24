@@ -6,36 +6,43 @@
  * @version 1.0
  */
 
-/**
+
+/******************************************************************************
  * 전역변수 선언
- * 공통적으로 쓰이는 변수를 선언한다.
- *
- * @Author : ihatelua
- * @Create : 2022년 05월 20일
- * @version 1.0
- */
+ ******************************************************************************/
 let commonMenu;
 let commonAJAX;
 
-let menuList;
-let reflectMenu;
-let reflectTextarea;
-let notUsedMenu;
-let notUsedTextarea;
-let deleteMenu;
-let deleteTextarea;
+let reflectMenuNode;        // 반영될 메뉴 포틀릿 노드
+let notUsedMenuNode;        // 비활성화 메뉴 포틀릿 노드
+let deleteMenuNode;         // 삭제할 메뉴 포틀릿 노드
 
-let currentMenu = [];
-let disabledMenu = [];
+let selectMenuListNode;     // 메뉴폼 메뉴선택 노드
+let selectIconNode;         // 메뉴폼 아이콘선택 노드
+
+let mainNmFormNode;             // 메뉴폼 대분류 이름 노드
+let mainIdFormNode;             // 메뉴폼 대분류 ID 노드
+let subNmFormNode;              // 메뉴폼 소분류 이름 노드
+let subIdFormNode;              // 메뉴폼 소분류 ID 노드
 
 
-/**
+// 테스트용 전역변수 지울예정
+let deleteTextareaNode;
+let reflectTextareaNode;
+let notUsedTextareaNode;
+
+// 데이터리스트
+let menuList;           // 메뉴 전체 리스트
+let currentMenu = [];   // 현재 활성화된 리스트
+let disabledMenu = [];  // 현재 비활성화된 리스트
+
+let selectMenuForm = [];
+
+
+
+/******************************************************************************
  * 페이지 로드후
- *
- * @Author : ihatelua
- * @Create : 2022년 05월 20일
- * @version 1.0
- */
+ ******************************************************************************/
 window.onload = () =>{
     // 공통 메뉴클래스 선언
     commonMenu = new CommonMenu();
@@ -43,21 +50,34 @@ window.onload = () =>{
     commonAJAX = new CommonAJAX();
 
     // 등록할 메뉴리스트 선언
-    reflectMenu = document.getElementById('reflectMenu');
-    reflectTextarea = document.getElementById("reflectTextarea");
+    reflectMenuNode = document.getElementById('reflectMenu');
+    reflectTextareaNode = document.getElementById("reflectTextarea");
 
     // 미사용 메뉴리스트 선언
-    notUsedMenu = document.getElementById('notUsedMenu');
-    notUsedTextarea = document.getElementById("notUsedTextarea");
+    notUsedMenuNode = document.getElementById('notUsedMenu');
+    notUsedTextareaNode = document.getElementById("notUsedTextarea");
 
     // 삭제할 메뉴리스트 선언
-    deleteMenu = document.getElementById('deleteMenu');
-    deleteTextarea = document.getElementById("deleteTextarea");
+    deleteMenuNode = document.getElementById('deleteMenu');
+    deleteTextareaNode = document.getElementById("deleteTextarea");
+
+    // 메뉴폼 메뉴선택 선언
+    selectMenuListNode = document.getElementById("selectMenuList");
+
+    // 아이콘 선택폼 선언
+    selectIconNode = document.getElementById('selectIconList');
+
+    mainNmFormNode = document.getElementById('mainNmForm');
+    mainIdFormNode = document.getElementById('mainIdForm');
+    subNmFormNode = document.getElementById('subNmForm');
+    subIdFormNode = document.getElementById('subIdForm');
+
     initPage();
 }
 
+
 /**
- * 기본적인 페이지 선언
+ * 페이지 초기화
  * 페이지가 로드가 될때 필요한 모듈을 선언한다.
  *
  * @Author : ihatelua
@@ -67,8 +87,10 @@ window.onload = () =>{
 const initPage = () => {
     commonMenu.setContentHeader("manager/createMenu");      // 메뉴 경로 세팅
     CommonModule.nestable('.dd', {"maxDepth":2});    // 메뉴포틀릿 세팅
+
     setEvent();
 }
+
 
 /**
  * 이벤트 선언
@@ -83,19 +105,38 @@ const setEvent = () => {
     let notUsedMenuList = [];
 
     // 반영될 메뉴리스트 이벤트
-    reflectMenu.children[0].addEventListener('mouseup', (event) => {
+    reflectMenuNode.children[0].addEventListener('mouseup', (event) => {
         reflectMenuList = CommonModule.nestable('#reflectMenu', 'serialize');
-        reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
+        reflectTextareaNode.innerText = window.JSON.stringify(reflectMenuList);
     });
 
     // 미사용 메뉴리스트 이벤트
-    notUsedMenu.children[0].addEventListener('mouseup', (event) => {
+    notUsedMenuNode.children[0].addEventListener('mouseup', (event) => {
         notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
-        notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
+        notUsedTextareaNode.innerText = window.JSON.stringify(notUsedMenuList);
     });
+
+    // 메뉴폼 셀렉트박스 이벤트
+    selectMenuListNode.addEventListener("change", (event) => {
+        // 입력폼 초기화
+        mainNmFormNode.value = "";
+        mainIdFormNode.value = "";
+        subNmFormNode.value = "";
+        subIdFormNode.value = "";
+
+        // 아이콘 초기화
+        iconChangeActive();
+    });
+
+
+    // 아이콘 선택폼 이벤트
+    selectIconNode.addEventListener('click', (e) => {
+
+    })
 
     findMenuList();
 }
+
 
 /**
  * 메뉴관리 리스트 가져오기
@@ -147,6 +188,7 @@ const findMenuList = () => {
     })
 }
 
+
 /**
  * 메뉴관리 리스트 세팅
  * 메뉴관리 리스트의 데이터를 화면에 뿌려준다.
@@ -158,26 +200,109 @@ const findMenuList = () => {
 const setMenuList = () => {
     let reflectMenuList = [];
     let notUsedMenuList = [];
+    let arrTmp = [];
 
     // 반영될 메뉴리스트 데이터 추가
-    var arr = currentMenu;
+    arrTmp = currentMenu;
     CommonModule.nestable('#reflectMenu', 'remove', "sample");
-    arr.forEach((ele) => {
+    arrTmp.forEach((ele) => {
         CommonModule.nestable('#reflectMenu', 'add', ele);
     })
     reflectMenuList = CommonModule.nestable('#reflectMenu', 'serialize');
-    reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
+    reflectTextareaNode.innerText = window.JSON.stringify(reflectMenuList);
 
     // 미사용 메뉴리스트 데이터 추가
-    var arr = disabledMenu;
+    arrTmp = disabledMenu;
     CommonModule.nestable('#notUsedMenu', 'remove', "sample");
-    arr.forEach((ele) => {
+    arrTmp.forEach((ele) => {
         CommonModule.nestable('#notUsedMenu', 'add', ele);
     })
     notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
-    notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
+    notUsedTextareaNode.innerText = window.JSON.stringify(notUsedMenuList);
+
+    bindComponent();
 }
 
 
-// 아이콘
-// <i class="zmdi zmdi-home"></i> <span> </span>
+/**
+ * 메뉴관리 컴포넌트 세팅
+ * 가져온 데이터를 컴포넌트에 바인딩하고
+ * 이벤트를 설정한다.
+ *
+ * @Author : ihatelua
+ * @Create : 2022년 05월 23일
+ * @version 1.0
+ */
+const bindComponent = () => {
+    // 아이콘 데이터 세팅
+    let iconArr = iconJSON.id;  // icon 리스트파일 가져오기
+    let size = iconArr.length;
+    for(let cnt = 0; cnt < size; cnt++){
+        // 요소 생성
+        let liNode = document.createElement('li');
+        let aNode = document.createElement('a');
+        let iNode = document.createElement('i');
+
+        // 요소추가
+        let liItem = selectIconNode.appendChild(liNode);
+        liItem.className = "nav-item";
+        liItem.style = "margin: auto;"
+        let aItem = liItem.appendChild(aNode);
+        aItem.className = "nav-link";
+        aItem.setAttribute("data-toggle", "tab");
+        aItem.style = "border:0px; padding: 0.2rem; margin: auto;"
+
+        // 아이콘 추가
+        let iItem = aItem.appendChild(iNode);
+        iItem.className = "zmdi zmdi-" + iconArr[cnt];
+    }
+
+    // 메뉴 셀렉트박스 데이터 세팅
+    menuList.forEach((ele, i) => {
+        // option node 생성
+        let optionNode = document.createElement("option");
+
+        if(i == 0){
+            optionNode.selected = true;
+            optionNode.innerHTML = "메뉴 선택";
+        } else if(ele.SUB_NM){
+            optionNode.id = ele.SUB_ID;
+            optionNode.innerHTML = ele.SUB_NM;
+            selectMenuForm.push({id:ele.SUB_ID, name:ele.SUB_NM});
+        } else{
+            optionNode.id = ele.MAIN_ID;
+            optionNode.innerHTML = ele.MAIN_NM;
+            selectMenuForm.push({id:ele.MAIN_ID, name:ele.MAIN_NM});
+        }
+
+        selectMenuListNode.appendChild(optionNode);
+    });
+}
+
+
+
+
+
+
+
+
+
+/******************************************************************************
+ * 메서드
+ ******************************************************************************/
+
+/**
+ * 아이콘 선택 비활성화
+ * 활성화된 아이콘을 비활성화 시킨다.
+ *
+ * @Author : ihatelua
+ * @Create : 2022년 05월 24일
+ * @version 1.0
+ */
+const iconChangeActive = () => {
+    let selectIconList = document.getElementById("selectIconList");
+    let icon = selectIconList.getElementsByClassName("nav-link active");
+    if(icon.length > 0){
+        icon[0].className = "nav-link"
+    }
+}
