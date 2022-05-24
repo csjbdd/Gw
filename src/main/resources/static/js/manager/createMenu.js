@@ -13,14 +13,17 @@
 let commonMenu;
 let commonAJAX;
 
-let reflectMenu;        // 반영될 메뉴 포틀릿
-let notUsedMenu;        // 비활성화 메뉴 포틀릿
-let deleteMenu;         // 삭제할 메뉴 포틀릿
+let reflectMenuNode;        // 반영될 메뉴 포틀릿 노드
+let notUsedMenuNode;        // 비활성화 메뉴 포틀릿 노드
+let deleteMenuNode;         // 삭제할 메뉴 포틀릿 노드
+let selectMenuListNode;     // 메뉴폼 메뉴선택 노드
+let selectIconNode;         // 메뉴폼 아이콘선택 노드
+
 
 // 테스트용 전역변수 지울예정
-let deleteTextarea;
-let reflectTextarea;
-let notUsedTextarea;
+let deleteTextareaNode;
+let reflectTextareaNode;
+let notUsedTextareaNode;
 
 // 데이터리스트
 let menuList;           // 메뉴 전체 리스트
@@ -41,16 +44,22 @@ window.onload = () =>{
     commonAJAX = new CommonAJAX();
 
     // 등록할 메뉴리스트 선언
-    reflectMenu = document.getElementById('reflectMenu');
-    reflectTextarea = document.getElementById("reflectTextarea");
+    reflectMenuNode = document.getElementById('reflectMenu');
+    reflectTextareaNode = document.getElementById("reflectTextarea");
 
     // 미사용 메뉴리스트 선언
-    notUsedMenu = document.getElementById('notUsedMenu');
-    notUsedTextarea = document.getElementById("notUsedTextarea");
+    notUsedMenuNode = document.getElementById('notUsedMenu');
+    notUsedTextareaNode = document.getElementById("notUsedTextarea");
 
     // 삭제할 메뉴리스트 선언
-    deleteMenu = document.getElementById('deleteMenu');
-    deleteTextarea = document.getElementById("deleteTextarea");
+    deleteMenuNode = document.getElementById('deleteMenu');
+    deleteTextareaNode = document.getElementById("deleteTextarea");
+
+    // 메뉴폼 메뉴선택 선언
+    selectMenuListNode = document.getElementById("selectMenuList");
+
+    // 아이콘 선택폼 선언
+    selectIconNode = document.getElementById('selectIconList');
     initPage();
 }
 
@@ -84,21 +93,27 @@ const setEvent = () => {
     let notUsedMenuList = [];
 
     // 반영될 메뉴리스트 이벤트
-    reflectMenu.children[0].addEventListener('mouseup', (event) => {
+    reflectMenuNode.children[0].addEventListener('mouseup', (event) => {
         reflectMenuList = CommonModule.nestable('#reflectMenu', 'serialize');
-        reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
+        reflectTextareaNode.innerText = window.JSON.stringify(reflectMenuList);
     });
 
     // 미사용 메뉴리스트 이벤트
-    notUsedMenu.children[0].addEventListener('mouseup', (event) => {
+    notUsedMenuNode.children[0].addEventListener('mouseup', (event) => {
         notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
-        notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
+        notUsedTextareaNode.innerText = window.JSON.stringify(notUsedMenuList);
     });
 
-    // 메뉴폼 셀렉트박스 이벤트처리
-    selectMenuList.addEventListener("change", (event) => {
-debugger;
+    // 메뉴폼 셀렉트박스 이벤트
+    selectMenuListNode.addEventListener("change", (event) => {
+        debugger;
     });
+
+
+    // 아이콘 선택폼 이벤트
+    selectIconNode.addEventListener('click', (e) => {
+        debugger;
+    })
 
     findMenuList();
 }
@@ -166,24 +181,25 @@ const findMenuList = () => {
 const setMenuList = () => {
     let reflectMenuList = [];
     let notUsedMenuList = [];
+    let arrTmp = [];
 
     // 반영될 메뉴리스트 데이터 추가
-    var arr = currentMenu;
+    arrTmp = currentMenu;
     CommonModule.nestable('#reflectMenu', 'remove', "sample");
-    arr.forEach((ele) => {
+    arrTmp.forEach((ele) => {
         CommonModule.nestable('#reflectMenu', 'add', ele);
     })
     reflectMenuList = CommonModule.nestable('#reflectMenu', 'serialize');
-    reflectTextarea.innerText = window.JSON.stringify(reflectMenuList);
+    reflectTextareaNode.innerText = window.JSON.stringify(reflectMenuList);
 
     // 미사용 메뉴리스트 데이터 추가
-    var arr = disabledMenu;
+    arrTmp = disabledMenu;
     CommonModule.nestable('#notUsedMenu', 'remove', "sample");
-    arr.forEach((ele) => {
+    arrTmp.forEach((ele) => {
         CommonModule.nestable('#notUsedMenu', 'add', ele);
     })
     notUsedMenuList = CommonModule.nestable('#notUsedMenu', 'serialize');
-    notUsedTextarea.innerText = window.JSON.stringify(notUsedMenuList);
+    notUsedTextareaNode.innerText = window.JSON.stringify(notUsedMenuList);
 
     bindComponent();
 }
@@ -199,10 +215,9 @@ const setMenuList = () => {
  * @version 1.0
  */
 const bindComponent = () => {
-    // 아이콘 세팅
+    // 아이콘 데이터 세팅
     let iconArr = iconJSON.id;  // icon 리스트파일 가져오기
     let size = iconArr.length;
-    let selectIcon = document.getElementById('selectIconList');
     for(let cnt = 0; cnt < size; cnt++){
         // 요소 생성
         let liNode = document.createElement('li');
@@ -210,7 +225,7 @@ const bindComponent = () => {
         let iNode = document.createElement('i');
 
         // 요소추가
-        let liItem = selectIcon.appendChild(liNode);
+        let liItem = selectIconNode.appendChild(liNode);
         liItem.className = "nav-item";
         liItem.style = "margin: auto;"
         let aItem = liItem.appendChild(aNode);
@@ -223,8 +238,7 @@ const bindComponent = () => {
         iItem.className = "zmdi zmdi-" + iconArr[cnt];
     }
 
-    // 메뉴 셀렉트박스
-    let selectMenuList = document.getElementById("selectMenuList");
+    // 메뉴 셀렉트박스 데이터 세팅
     menuList.forEach((ele, i) => {
         // option node 생성
         let optionNode = document.createElement("option");
@@ -242,12 +256,8 @@ const bindComponent = () => {
             selectMenuForm.push({id:ele.MAIN_ID, name:ele.MAIN_NM});
         }
 
-        selectMenuList.appendChild(optionNode);
+        selectMenuListNode.appendChild(optionNode);
     });
-
-
-
-
 }
 
 
