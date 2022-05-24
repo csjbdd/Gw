@@ -16,8 +16,14 @@ let commonAJAX;
 let reflectMenuNode;        // 반영될 메뉴 포틀릿 노드
 let notUsedMenuNode;        // 비활성화 메뉴 포틀릿 노드
 let deleteMenuNode;         // 삭제할 메뉴 포틀릿 노드
+
 let selectMenuListNode;     // 메뉴폼 메뉴선택 노드
 let selectIconNode;         // 메뉴폼 아이콘선택 노드
+
+let mainNmFormNode;             // 메뉴폼 대분류 이름 노드
+let mainIdFormNode;             // 메뉴폼 대분류 ID 노드
+let subNmFormNode;              // 메뉴폼 소분류 이름 노드
+let subIdFormNode;              // 메뉴폼 소분류 ID 노드
 
 
 // 테스트용 전역변수 지울예정
@@ -60,6 +66,12 @@ window.onload = () =>{
 
     // 아이콘 선택폼 선언
     selectIconNode = document.getElementById('selectIconList');
+
+    mainNmFormNode = document.getElementById('mainNmForm');
+    mainIdFormNode = document.getElementById('mainIdForm');
+    subNmFormNode = document.getElementById('subNmForm');
+    subIdFormNode = document.getElementById('subIdForm');
+
     initPage();
 }
 
@@ -106,13 +118,20 @@ const setEvent = () => {
 
     // 메뉴폼 셀렉트박스 이벤트
     selectMenuListNode.addEventListener("change", (event) => {
-        debugger;
+        // 입력폼 초기화
+        mainNmFormNode.value = "";
+        mainIdFormNode.value = "";
+        subNmFormNode.value = "";
+        subIdFormNode.value = "";
+
+        // 아이콘 초기화
+        iconChangeActive();
     });
 
 
     // 아이콘 선택폼 이벤트
     selectIconNode.addEventListener('click', (e) => {
-        debugger;
+
     })
 
     findMenuList();
