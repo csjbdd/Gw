@@ -1,5 +1,5 @@
 /* 공통 JS */
-class CommonAJAX {
+class commonAJAX {
     constructor () { }
 
     _requestPutData = (uri,jsonString) => {
@@ -51,5 +51,6 @@ class CommonAJAX {
     }
 }
 
+const CommonAJAX = new commonAJAX();
 
 
