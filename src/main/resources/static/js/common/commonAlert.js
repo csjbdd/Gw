@@ -86,3 +86,5 @@ class commonAlert{
         });
     }
 }
+
+const CommonAlert = new commonAlert();
