@@ -126,13 +126,62 @@ class CreateMenu{
 
             // 아이콘 초기화
             this.iconChangeActive();
-        });
 
+            let index = this.selectMenuListNode.selectedIndex+1;
+            let selectedNode = this.selectMenuListNode.childNodes[index];
+
+            let matchRow = CommonUtil.getMatchedJSON(this.saveList, "SUB_ID", selectedNode.id);
+            matchRow = matchRow.length != 0 ? matchRow : CommonUtil.getMatchedJSON(this.saveList, "MAIN_ID", selectedNode.id);
+
+            if(matchRow.length > 0){
+                // 신규 메뉴라면
+                if(matchRow[0].rowStatus == "C"){
+                    this.mainNmFormNode.disabled = false;
+                    this.mainIdFormNode.disabled = false;
+                    this.subNmFormNode.disabled = false;
+                    this.subIdFormNode.disabled = false;
+                }else{
+                    this.mainNmFormNode.disabled = true;
+                    this.mainIdFormNode.disabled = true;
+                    this.subNmFormNode.disabled = false;
+                    this.subIdFormNode.disabled = false;
+                }
+                // 바인딩
+                this.mainNmFormNode.value = matchRow[0].MAIN_NM;
+                this.mainIdFormNode.value = matchRow[0].MAIN_ID;
+                this.subNmFormNode.value = matchRow[0].SUB_NM;
+                this.subIdFormNode.value = matchRow[0].SUB_ID;
+                this.mainNmFormNode.setAttribute("orginId", matchRow[0].MAIN_NM);
+                this.mainIdFormNode.setAttribute("orginId", matchRow[0].MAIN_ID);
+                this.subNmFormNode.setAttribute("orginId", matchRow[0].SUB_NM);
+                this.subIdFormNode.setAttribute("orginId", matchRow[0].SUB_ID);
+
+                this.selectIcon(matchRow[0].ICON)
+            }
+        });
 
         // 아이콘 선택폼 이벤트
         this.selectIconNode.addEventListener('click', (event) => {
 
-        })
+        });
+
+        // 입력폼 이벤트
+        this.mainNmFormNode.addEventListener("change", (event) => {      // 대분류이름 이벤트
+debugger;
+
+        });
+        this.mainIdFormNode.addEventListener("change", (event) => {      // 대분류ID 이벤트
+
+        });
+        this.subNmFormNode.addEventListener("change", (event) => {       // 소분류이름 이벤트
+
+        });
+        this.subIdFormNode.addEventListener("change", (event) => {       // 소분류ID 이벤트
+            let originId =  this.subIdFormNode.getAttribute("orginId");
+            let matchRow = CommonUtil.getMatchedJSON(this.saveList, "SUB_ID", originId);
+
+debugger;
+        });
 
         this.findMenuList();
     }
@@ -300,6 +349,29 @@ class CreateMenu{
         let icon = selectIconList.getElementsByClassName("nav-link active");
         if(icon.length > 0){
             icon[0].className = "nav-link"
+        }
+    }
+
+    /**
+     * 아이콘 선택
+     * 가져온 값에 따라 아이콘을 선택한다.
+     *
+     * @Author : ihatelua
+     * @Create : 2022년 05월 26일
+     * @version 1.0
+     */
+    selectIcon = (iconNm) => {
+        debugger;
+        let selectIconList = document.getElementById("selectIconList");         // 아이콘 리스트 노드
+        let isActiveIcon = selectIconList.getElementsByClassName("active");    // 활성화된 아이콘
+        let icon = selectIconList.getElementsByClassName(iconNm);                        // 선택할 아이콘
+
+        if(icon.length > 0){
+            // 기존 아이콘있으면 비활성화
+            if(isActiveIcon.length > 0){
+                isActiveIcon[0].classList.remove("active");
+            }
+            icon[0].parentNode.classList.add("active");
         }
     }
 
