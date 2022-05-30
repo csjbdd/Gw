@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import sun.security.util.Password;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Controller
@@ -32,14 +34,13 @@ public class LoginController {
     @PostMapping(value = "/")
     public String login(@RequestParam Map<String,Object> list) throws Exception {
         Map<String,Object> map = commonService.selectOne("LoginMapper.Login",list);
-
+        Map<Integer, Object> a = new HashMap<>();
         return "ui/login/sign-in";
     }
 
     @RequestMapping("/recoverypw")
     public ModelAndView findPw(@RequestParam Map<String,Object> list) {
         ModelAndView mv = new ModelAndView();
-
         mv.setViewName("ui/login/sign-in");
         return mv;
     }

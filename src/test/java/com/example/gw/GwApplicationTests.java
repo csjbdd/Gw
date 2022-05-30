@@ -17,6 +17,8 @@ class GwApplicationTests {
         String username = "egline";
         String password = "0000";
 
+
+
         System.out.println(jasyptEncoding(url));
         System.out.println(jasyptEncoding(username));
         System.out.println(jasyptEncoding(password));

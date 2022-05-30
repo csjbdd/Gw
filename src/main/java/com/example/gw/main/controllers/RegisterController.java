@@ -13,6 +13,7 @@ import java.util.Map;
 @Controller
 public class RegisterController {
 
+
     CommonServiceImpl commonService;
     PasswordEncoder passwordEncoder;
 
