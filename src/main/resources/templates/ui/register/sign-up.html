@@ -23,6 +23,9 @@
         #pwlabel2 {
             font-size: 11px;
         }
+        #emaillabel {
+            font-size: 11px;
+        }
     </style>
 </head>
 
@@ -60,11 +63,12 @@
                         </div>
                         <label id="pwlabel2"></label>
                         <div class="input-group mb-3">
-                            <input id="email" type="email" class="form-control" placeholder="이메일">
+                            <input id="registeremail" name="email" type="email" class="form-control" placeholder="이메일">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i id="" class="zmdi zmdi-check"></i></span>
+                                <span class="input-group-text"><i id="email-icon" class="zmdi zmdi-check"></i></span>
                             </div>
                         </div>
+                        <label id="emaillabel"></label>
                         <input type="submit" class="btn btn-primary btn-block waves-effect waves-light" value="가입하기">
                         <div class="signin_with mt-3">
                             <a class="link" href="/">이미 가입하셨나요?</a>
@@ -89,17 +93,24 @@
 <!-- Jquery Core Js -->
 <script src="assets/bundles/libscripts.bundle.js"></script>
 <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
-<script src="assets/util/_util.js"></script>
 <script>
+    // input
     var registerId = document.getElementById('registerid');
     var registerPw = document.getElementById('registerpw');
     var registerPw2 = document.getElementById('registerpw2');
+    var registerEmail = document.getElementById('registeremail');
+
+    // 라벨
     var idLabel = document.getElementById('idlabel');
     var pwLabel = document.getElementById('pwlabel');
     var pwLabel2 = document.getElementById('pwlabel2');
+    var emailLabel = document.getElementById('emaillabel');
+
+    // 아이콘
     var idIcon = document.getElementById('id-icon');
     var pwIcon = document.getElementById('pw-icon');
     var pwIcon2 = document.getElementById('pw2-icon');
+    var emailIcon = document.getElementById('email-icon');
 
 
 
@@ -111,13 +122,17 @@
             return false;
         } else if (!checkExistData(registerPw2.value,"패스워드 확인을")) {
             return false;
+        } else if (!checkExistData(registerEmail.value,"이메일을")) {
+            return false;
         } else if (!checkUserId(registerId.value)) {
             return false;
         } else if (!checkPassword(registerId.value,registerPw.value,registerPw2.value)) {
             return false;
+        } else if (!checkEmail(registerEmail.value)) {
+            return false;
         }
         return true;
-    }
+    };
 
     // 공백확인 함수
     const checkExistData = (value, dataName) => {
@@ -126,8 +141,44 @@
             return false;
         }
         return true;
-    }
+    };
+    const checkEmail = (email) => {
+        let emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+        if (!emailRegExp.test(email)) {
+            emailLabel.innerText = "올바른 이메일 형식이 아닙니다!";
+            emailLabel.style.color = "red";
+            emailIcon.style.color = "red";
+            registerEmail.focus();
+            return false;
+        }
+        else {
+            const obj = {"email": registerEmail.value}
+            //AJAX 객체 선언
+            let xhr = new XMLHttpRequest();
+            //서버와 통신준비
+            xhr.open('POST','emailcheck',false);
+            xhr.setRequestHeader('content-type', 'application/json');
+            //파라미터로 받은 obj JSON으로 가공후 서버에 보냄
+            xhr.send(JSON.stringify(obj));
 
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                let res = JSON.parse(xhr.response);
+                if(res.CNT > 0) {
+                    emailLabel.innerText="중복된 이메일 입니다.";
+                    emailLabel.style.color="red";
+                    emailIcon.style.color="red";
+                    registerEmail.focus();
+                    return false;
+                }
+                else {
+                    emailLabel.innerText="사용 가능한 이메일 입니다.";
+                    emailLabel.style.color="green";
+                    emailIcon.style.color="green";
+                    return true;
+                }
+            }
+        }
+    };
 
     const checkUserId = (id) => {
         let idRegExp = /^[a-zA-z0-9]{4,12}$/; //아이디 유효성 검사
@@ -139,38 +190,32 @@
             return false;
         }
         else {
-        const obj = {"id": registerId.value}
+            const obj = {"id": registerId.value}
             //AJAX 객체 선언
             let xhr = new XMLHttpRequest();
             //서버와 통신준비
-            xhr.open('POST','idcheck',true);
+            xhr.open('POST', 'idcheck', false);
             xhr.setRequestHeader('content-type', 'application/json');
             //파라미터로 받은 obj JSON으로 가공후 서버에 보냄
             xhr.send(JSON.stringify(obj));
 
-            xhr.onload = () => {
-
-                //통신성공
-                if (xhr.status == 200) {
-                    //결과값 객체화
-                    var res = JSON.parse(xhr.response);
-                    if(res.CNT >= 1) {
-                        idLabel.innerText="이미 가입된 아이디 입니다.";
-                        idLabel.style.color="red";
-                        idIcon.style.color="red";
-                        registerId.focus();
-                    }
-                    else {
-                        idLabel.innerText="사용 가능한 아이디 입니다.";
-                        idLabel.style.color="green";
-                        idIcon.style.color="green";
-                    }
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                let res = JSON.parse(xhr.response);
+                if (res.CNT > 0) {
+                    idLabel.innerText = "중복된 아이디 입니다.";
+                    idLabel.style.color = "red";
+                    idIcon.style.color = "red";
+                    registerId.focus();
+                    return false;
+                } else {
+                    idLabel.innerText = "사용 가능한 이메일 입니다.";
+                    idLabel.style.color = "green";
+                    idIcon.style.color = "green";
+                    return true;
                 }
             }
-            return true;
         }
-
-    }
+    };
 
     const checkPassword = (id, password1, password2) => {
 
@@ -216,14 +261,14 @@
         }
 
         return true; //확인이 완료되었을 때
-    }
+    };
 
     registerId.addEventListener("change",()=>{
         checkUserId(registerId.value);
-    })
+    });
     registerPw.addEventListener("change",()=>{
         checkPassword(registerId.value,registerPw.value);
-    })
+    });
 
     registerPw2.addEventListener("change",()=>{
         //비밀번호와 비밀번호 확인이 맞지 않다면..
@@ -238,8 +283,11 @@
             pwIcon2.style.color = "green";
         }
 
-    })
+    });
 
+    registerEmail.addEventListener("change",()=>{
+        checkEmail(registerEmail.value);
+    });
 
 
 

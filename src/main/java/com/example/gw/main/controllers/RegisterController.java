@@ -45,6 +45,11 @@ public class RegisterController {
         Map<String,Object> map = commonService.selectOne("RegisterMapper.IdCheck",list);
         return map;
     }
+    @PostMapping(value="/emailcheck")
+    public @ResponseBody Map<String, Object> emailCheck(@RequestBody Map<String,Object> list) throws Exception {
+        Map<String,Object> map = commonService.selectOne("RegisterMapper.EmailCheck",list);
+        return map;
+    }
 
 
 }

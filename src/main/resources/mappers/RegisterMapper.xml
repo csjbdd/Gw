@@ -6,15 +6,23 @@
             `id`
         ,   `password`
         ,   `register_date`
+        ,   `email`
         ) VALUES (
             #{id}
         ,   #{password}
         ,   NOW()
+        ,   #{email}
         )
     </insert>
     <select id="IdCheck" parameterType="map" resultType="map">
         SELECT COUNT(*) as CNT
           FROM usercheck
          WHERE id = #{id}
+    </select>
+
+    <select id="EmailCheck" parameterType="map" resultType="map">
+        SELECT COUNT(*) as CNT
+        FROM usercheck
+        WHERE email = #{email}
     </select>
 </mapper>
