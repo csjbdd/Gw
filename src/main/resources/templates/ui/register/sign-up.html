@@ -131,6 +131,7 @@
         } else if (!checkEmail(registerEmail.value)) {
             return false;
         }
+        alert('회원가입이 완료 되었습니다.');
         return true;
     };
 
@@ -208,7 +209,7 @@
                     registerId.focus();
                     return false;
                 } else {
-                    idLabel.innerText = "사용 가능한 이메일 입니다.";
+                    idLabel.innerText = "사용 가능한 아이디 입니다.";
                     idLabel.style.color = "green";
                     idIcon.style.color = "green";
                     return true;

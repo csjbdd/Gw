@@ -24,20 +24,20 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-4 col-sm-12">
-                  <form class="card auth_form">
+                  <form class="card auth_form" method="post">
                      <div class="header">
                         <img class="logo" src="images/title_icon.svg" alt="">
                         <h5>로그인</h5>
                      </div>
                      <div class="body">
                         <div class="input-group mb-3">
-                           <input type="text" class="form-control" placeholder="아이디">
+                           <input type="text" name="id" class="form-control" placeholder="아이디">
                            <div class="input-group-append">
                               <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                            </div>
                         </div>
                         <div class="input-group mb-3">
-                           <input type="password" class="form-control" placeholder="패스워드">
+                           <input type="password" name="password" class="form-control" placeholder="패스워드">
                            <div class="input-group-append">
                               <span class="input-group-text"><i id="pw-icon" class="zmdi zmdi-lock"></i></span>
                            </div>
@@ -47,7 +47,7 @@
                            <input id="remember_me" type="checkbox">
                            <label for="remember_me">아이디 저장</label>
                         </div>
-                        <a href="index.html" class="btn btn-primary btn-block waves-effect waves-light">로그인</a>
+                        <input type="submit"  class="btn btn-primary btn-block waves-effect waves-light" value="로그인">
                         <div class="signin_with mt-3">
                            <div class="signin_with mt-3">
                               <a class="link" href="/recoveryid">아이디를 잊어버리셨나요?</a>

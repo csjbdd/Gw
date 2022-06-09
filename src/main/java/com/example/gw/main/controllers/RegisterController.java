@@ -36,7 +36,7 @@ public class RegisterController {
         String encodePassword = passwordEncoder.encode(rawPassword);
         list.put("password",encodePassword);
         commonService.insert("RegisterMapper.Register",list);
-        return "ui/register/sign-up";
+        return "ui/login/sign-in";
     }
 
 
